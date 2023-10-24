@@ -21,6 +21,9 @@
     <ClCompile Include="list.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="subj.c">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="list.h">
@@ -29,5 +32,11 @@
     <ClInclude Include="item.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="subj.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="testdata.txt" />
   </ItemGroup>
 </Project>

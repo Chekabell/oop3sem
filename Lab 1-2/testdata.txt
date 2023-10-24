@@ -1,0 +1,21 @@
+		Animal
+
+Name: Aleks
+Area: Madagaskar
+Temperature: 25
+Wetness: 90
+Max age: 25
+Reprodactive age: 5
+Type food: meat
+
+		Plant
+
+Name: Dori
+Area: forest
+Temperature: 15
+Wetness: 80
+Max age: 1000
+Reprodactive age: 15
+Type plant: tree
+Metod reproduction: semena
+Fruits: yes
