@@ -49,7 +49,6 @@ struct Item* GetItem(struct List* list, int index) {
 	int k = 0;
 	for (curr; curr != NULL; curr = curr->next) {
 		if (k == index) {
-			printf("%p\n", curr);
 			break;
 		}
 		k++;

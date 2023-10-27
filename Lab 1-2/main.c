@@ -2,10 +2,13 @@
 #include <stdlib.h>
 #include "subj.h"
 
+const char* Menu[10] = {"(none)", "add","count","print list","delete","insert","clear","sort","search years on intervals","exit" };
+const char* Type[5] = {"(unknown)", "Plant","Fish","Bird","Animal" };
+
 int DoMenu(char* s[], int max) {
     int i = 0;
     for (i = 1; i <= max; i++) {
-        printf("%i. %s", i, s[i]);
+        printf("%i - %s\n", i, s[i]);
     }
     printf(">");
     fflush(stdin);
@@ -21,31 +24,12 @@ int main(void) {
     int key = 0, index = 0, typ = 0;
     int lborder, rborder;
     while (1) {
-        printf("1 - add\n2 - count\n3 - print list\n4 - delete\n5 - insert\n6 - clear\n0 - exit\n");
-        fflush(stdin);
-        if (scanf_s("%i", &key)) {
+        key = DoMenu(Menu, 9);
+        if (key) {
             switch (key) {
             case 1:
-                while (1) {
-                    fflush(stdin);
-                    printf("\n1 - Plant\t2 - Fish\n3 - Bird\t4 - Animal\n\n");
-                    printf("Enter number of type entity: ");
-                    if (scanf_s("%i", &typ) && typ > 0 && typ < 5) break;
-                };
-                switch (typ) {
-                case 1:
-                    item = Create(Plant);
-                    break;
-                case 2:
-                    item = Create(Fish);
-                    break;
-                case 3:
-                    item = Create(Bird);
-                    break;
-                case 4:
-                    item = Create(Animal);
-                    break;
-                };
+                typ = DoMenu(Type, 4);
+                item = Create(typ);
                 Add(&list, (struct Item*)item);
                 InputObject(item);
                 break;
@@ -68,26 +52,8 @@ int main(void) {
                 printf("Enter index: ");
                 while (1) {
                     if (scanf_s("%i", &index)) {
-                        while (1) {
-                            fflush(stdin);
-                            printf("\n1 - Plant\t2 - Fish\n3 - Bird\t4 - Animal\n\n");
-                            printf("Enter number of type entity: ");
-                            if (scanf_s("%i", &typ) && typ > 0 && typ < 5) break;
-                        };
-                        switch (typ) {
-                        case 1:
-                            item = Create(Plant);
-                            break;
-                        case 2:
-                            item = Create(Fish);
-                            break;
-                        case 3:
-                            item = Create(Bird);
-                            break;
-                        case 4:
-                            item = Create(Animal);
-                            break;
-                        };
+                        typ = DoMenu(Type, 4);
+                        item = Create(typ);
                         Insert(&list, (struct Item*)item, index);
                         InputObject(item);
                         break;
@@ -105,10 +71,11 @@ int main(void) {
                 while (1) {
                     printf("Enter interval age : ");
                     scanf_s("%i %i", &lborder, &rborder);
+                    break;
                 }
                 SearchYears(&list, lborder, rborder);
                 break;
-            case 0:
+            case 9:
                 return 0;
             default:
                 printf("Wrong opinion\n");
@@ -116,4 +83,5 @@ int main(void) {
             }
         }
     }
+    return 0;
 }

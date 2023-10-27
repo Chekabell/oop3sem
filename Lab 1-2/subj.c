@@ -6,18 +6,18 @@
 struct Base* Create(enum ItemType t) {
 	struct Base* p = NULL;
 	switch (t) {
-	case Plant:
-		p = calloc(1, sizeof(struct Plant));
-		break;
-	case Fish:
-		p = calloc(1, sizeof(struct Fish));
-		break;
-	case Bird:
-		p = calloc(1, sizeof(struct Bird));
-		break;
-	case Animal:
-		p = calloc(1, sizeof(struct Animal));
-		break;
+		case Plant:
+			p = calloc(1, sizeof(struct Plant));
+			break;
+		case Fish:
+			p = calloc(1, sizeof(struct Fish));
+			break;
+		case Bird:
+			p = calloc(1, sizeof(struct Bird));
+			break;
+		case Animal:
+			p = calloc(1, sizeof(struct Animal));
+			break;
 	}
 	if (p) p->type = t;
 	return p;
@@ -286,25 +286,23 @@ void PrintListObj(struct List* list) {
 	else printf("ERROR: wrong list!\n");
 }
 
+void Switch(struct List* list, int j) {
+	struct Item* a = Remove(list, j);
+	Insert(list, a, j + 1);
+}
+
 void SortName(struct List* list) {
 	int i, j, len = Count(list);
 	struct Base* p1, * p2;
 	for (i = 0; i <= len; i++) {
-		for (j = 0; j <= len - 1; j++) {
+		for (j = 0; j < len - 1; j++) {
 			p1 = (struct Base*)GetItem(list, j);
 			p2 = (struct Base*)GetItem(list, j + 1);
 			if (strcmp(p1->name, p2->name) > 0) {
-				Switch(list, j, j + 1);
+				Switch(list, j);
 			};
 		}
 	}
-}
-
-void Switch(struct List* list, int p1, int p2) {
-	struct Item* a = Remove(list, p1);
-	struct Item* b = Remove(list, p2);
-	Insert(list, a, p2);
-	Insert(list, b, p1);
 }
 
 void SearchYears(struct List* list, int lborder, int rborder) {

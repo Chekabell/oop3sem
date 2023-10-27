@@ -90,7 +90,7 @@ void PrintObject(struct Base*);
 void PrintListObj(struct List*);
 
 void SortName(struct List*);
-void Switch(struct List*, int, int);
+void Switch(struct List*, int);
 void SearchYears(struct List*, int, int);
 
 #endif
