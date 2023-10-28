@@ -7,10 +7,11 @@ const char* Type[5] = {"(unknown)", "Plant","Fish","Bird","Animal" };
 
 int DoMenu(char* s[], int max) {
     int i = 0;
+    printf("\n");
     for (i = 1; i <= max; i++) {
         printf("%i - %s\n", i, s[i]);
     }
-    printf(">");
+    printf("\n>");
     fflush(stdin);
     scanf_s("%i", &i);
     return i<1 || i>max ? 0 : i;
@@ -24,14 +25,21 @@ int main(void) {
     int key = 0, index = 0, typ = 0;
     int lborder, rborder;
     while (1) {
+        typ = 0; 
+        item = NULL;
         key = DoMenu(Menu, 9);
         if (key) {
             switch (key) {
             case 1:
-                typ = DoMenu(Type, 4);
-                item = Create(typ);
-                Add(&list, (struct Item*)item);
-                InputObject(item);
+                while (1) {
+                    if (typ = DoMenu(Type, 4)) {
+                        item = Create(typ);
+                        Add(&list, (struct Item*)item);
+                        InputObject(item);
+                        break;
+                    }
+                    printf("Unknown type object\n");
+                }
                 break;
             case 2:
                 printf("%i\n", Count(&list));
@@ -43,7 +51,7 @@ int main(void) {
                 printf("Enter index: ");
                 while (1) {
                     if (scanf_s("%i", &index)) {
-                        Delete(&list, index);
+                        Delete(&list, index-1);
                         break;
                     }
                 }
@@ -52,10 +60,15 @@ int main(void) {
                 printf("Enter index: ");
                 while (1) {
                     if (scanf_s("%i", &index)) {
-                        typ = DoMenu(Type, 4);
-                        item = Create(typ);
-                        Insert(&list, (struct Item*)item, index);
-                        InputObject(item);
+                        while (1) {
+                            if (typ = DoMenu(Type, 4)) {
+                                item = Create(typ);
+                                Insert(&list, (struct Item*)item, index-1);
+                                InputObject(item);
+                                break;
+                            }
+                            printf("Unknown type object\n");
+                        }
                         break;
                     }
                 }
@@ -69,7 +82,7 @@ int main(void) {
                 break;
             case 8:
                 while (1) {
-                    printf("Enter interval age : ");
+                    printf("Enter interval age with space: ");
                     scanf_s("%i %i", &lborder, &rborder);
                     break;
                 }

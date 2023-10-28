@@ -19,9 +19,9 @@ void Add(struct List* list, struct Item* item) {
 
 int Count(struct List* list) {
 	int i;
-	struct Item* curr = list->head;
-	for (i = 0; curr != NULL; i++) {
-		curr = curr->next;
+	struct Item* curr;
+	for (curr = list->head, i = 0; curr; curr = curr->next) {
+		i++;
 	}
 	return i;
 }
@@ -29,7 +29,7 @@ int Count(struct List* list) {
 void PrintList(struct List* list) {
 	struct Item* curr;
 	if (Count(list)) {
-		for (curr = list->head; curr != NULL; curr = curr->next) {
+		for (curr = list->head; curr ; curr = curr->next) {
 			if (curr == list->head) {
 				printf("HEAD:\nCurr: %p\nNext: %p\n\n", curr, curr->next);
 			}
@@ -45,9 +45,9 @@ void PrintList(struct List* list) {
 }
 
 struct Item* GetItem(struct List* list, int index) {
-	struct Item* curr = list->head;
+	struct Item* curr;
 	int k = 0;
-	for (curr; curr != NULL; curr = curr->next) {
+	for (curr = list->head; curr ; curr = curr->next) {
 		if (k == index) {
 			break;
 		}
@@ -58,8 +58,9 @@ struct Item* GetItem(struct List* list, int index) {
 
 int GetIndex(struct List* list, struct Item* item) {
 	int i;
-	struct Item* curr = list->head;
-	for (i = 0; curr != item; curr = curr->next, i++) {
+	struct Item* curr;;
+	for (curr = list->head, i = 0; curr != item; curr = curr->next) {
+		i++;
 	}
 	return i;
 }
@@ -97,8 +98,8 @@ void Delete(struct List* list, int i) {
 }
 
 void Clear(struct List* list) {
-	struct Item* curr = list->head;
-	for (curr; list->head != NULL; curr = list->head) {
+	struct Item* curr;
+	while (list->head){
 		Delete(list, 0);
 	}
 }

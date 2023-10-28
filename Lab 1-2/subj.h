@@ -27,8 +27,8 @@ struct Plant {
     int wetness;
     int max_age;
     int repr_age;
-    char type_plant[10];
-    char metod_repr[10];
+    char type_plant[15];
+    char metod_repr[15];
     char fruits[4];
 };
 

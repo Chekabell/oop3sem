@@ -7,16 +7,16 @@ struct Base* Create(enum ItemType t) {
 	struct Base* p = NULL;
 	switch (t) {
 		case Plant:
-			p = calloc(1, sizeof(struct Plant));
+			p = (struct Base*)calloc(1, sizeof(struct Plant));
 			break;
 		case Fish:
-			p = calloc(1, sizeof(struct Fish));
+			p = (struct Base*)calloc(1, sizeof(struct Fish));
 			break;
 		case Bird:
-			p = calloc(1, sizeof(struct Bird));
+			p = (struct Base*)calloc(1, sizeof(struct Bird));
 			break;
 		case Animal:
-			p = calloc(1, sizeof(struct Animal));
+			p = (struct Base*)calloc(1, sizeof(struct Animal));
 			break;
 	}
 	if (p) p->type = t;
@@ -66,7 +66,7 @@ void InputPlant(struct Plant* p) {
 	};
 	while (1) {
 		fflush(stdin);
-		printf("Enter fruits: ");
+		printf("Enter presence of fruits: ");
 		if (scanf_s("%s", p->fruits, (unsigned)sizeof(p->fruits))) break;
 	};
 }
@@ -226,7 +226,7 @@ void PrintPlant(struct Plant* p) {
 	printf("Temperature: %i\nWetness: %i\n", p->temperature, p->wetness);
 	printf("Max age: %i\nReprodactive age: %i\n", p->max_age, p->repr_age);
 	printf("Type plant: %s\nMetod reproduction: %s\n", p->type_plant, p->metod_repr);
-	printf("Fruits: %s\n", p->fruits);
+	printf("Presence of fruits: %s\n", p->fruits);
 }
 
 void PrintFish(struct Fish* p) {
@@ -255,19 +255,19 @@ void PrintObject(struct Base* p) {
 	if (p)
 		switch (p->type) {
 		case Plant:
-			printf("\n==------------------==\n\tPlant:\n==------------------==\n");
+			printf("\n\n==------------------==\n\tPlant:\n==------------------==\n");
 			PrintPlant((struct Plant*)p);
 			break;
 		case Fish:
-			printf("\n==------------------==\n\tFish:\n==------------------==\n");
+			printf("\n\n==------------------==\n\tFish:\n==------------------==\n");
 			PrintFish((struct Fish*)p);
 			break;
 		case Bird:
-			printf("\n==------------------==\n\tBird:\n==------------------==\n");
+			printf("\n\n==------------------==\n\tBird:\n==------------------==\n");
 			PrintBird((struct Bird*)p);
 			break;
 		case Animal:
-			printf("\n==------------------==\n\tAnimal:\n==------------------==\n");
+			printf("\n\n==------------------==\n\tAnimal:\n==------------------==\n");
 			PrintAnimal((struct Animal*)p);
 			break;
 		default:
@@ -306,9 +306,9 @@ void SortName(struct List* list) {
 }
 
 void SearchYears(struct List* list, int lborder, int rborder) {
-	struct Item* curr = list->head;
+	struct Item* curr;
 	struct Base* tmp = NULL;
-	for (; curr; curr = curr->next) {
+	for (curr = list->head; curr; curr = curr->next) {
 		tmp = (struct Base*)curr;
 		if (tmp->max_age >= lborder && tmp->max_age <= rborder) {
 			PrintObject(tmp);

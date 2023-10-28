@@ -1,5 +1,5 @@
-		Animal
-
+1
+4
 Aleks
 Madagaskar
 25
@@ -7,9 +7,8 @@ Madagaskar
 25
 5
 meat
-
-		Plant
-
+1
+1
 Dori
 forest
 15
@@ -19,9 +18,8 @@ forest
 tree
 semena
 yes
-
-		Fish
-
+1
+2
 Nemo
 sea
 15
@@ -29,3 +27,15 @@ sea
 5
 1
 salt
+1
+3
+Cheese
+jungle
+25
+70
+5
+2
+2
+yes
+no
+no
