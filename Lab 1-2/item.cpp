@@ -3,10 +3,8 @@
 #include "item.h"
 
 Item::~Item() {
-	Item* item = list->head;
-	while (1) {
-		if ()
-	}
+	next->prev = prev;
+	prev->next = next;
 }
 
 void Item::SetNext(Item* n) {

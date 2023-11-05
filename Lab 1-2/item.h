@@ -1,20 +1,20 @@
 #ifndef ITEM_H
 #define ITEM_M
+#include <iostream>
+using std::cout;
+using std::cin;
+using std::endl;
 
 class Item {
 private:
-    List* list;
     Item* next;
     Item* prev;
 public:
-    List* GetList() const;
-    Item* GetNext() const;
-    Item* GetPrev() const;
-    void SetList(List*);
+    ~Item();
     void SetNext(Item*);
     void SetPrev(Item*);
-    ~Item()
-
+    Item* GetNext() const;
+    Item* GetPrev() const;
 };
 
 #endif

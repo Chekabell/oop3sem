@@ -11,20 +11,20 @@ List::~List() {
 	
 }
 
-Item* List::GetHead() {
-	return head;
-}
-
-Item* List::GetTail() {
-	return tail;
-}
-
 void List::SetHead(Item* item) {
 	head = item;
 }
 
 void List::SetTail(Item* item) {
 	tail = item;
+}
+
+Item* List::GetHead() const{
+	return head;
+}
+
+Item* List::GetTail() const {
+	return tail;
 }
 
 void List::Add(List* list, Item* item) {
