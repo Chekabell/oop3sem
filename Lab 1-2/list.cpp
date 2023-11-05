@@ -7,8 +7,18 @@ List::List(Item* h, Item* t) {
 	SetTail(t);
 }
 
+List::List(Item* ht) {
+	SetHead(ht);
+	SetTail(ht);
+}
+
+List::List() {
+	SetHead(NULL);
+	SetTail(NULL);
+}
+
 List::~List() {
-	
+	while (head) delete head;
 }
 
 void List::SetHead(Item* item) {
@@ -52,31 +62,23 @@ int List::Count(List* list) {
 }
 
 void List::PrintList(List* list) {
-	int k = 0;
+	int k = 2, len = Count(list);
 	Item* curr = list->head;
-	if (Count(list)) {
-		/*printf("\t\tPREV\tCURR     NEXT\n");
-		
+	if(len) cout << "\n\t\tPREV\t\t CURR\t\t NEXT" << endl;
+	if (len > 1) {
+		cout << "1 - HEAD: " << curr->GetPrev() << " " << curr << " " << curr->GetNext() << endl;
+		curr = curr->GetNext();
 		while (curr->GetNext()) {
-			if (k==0) printf("%i - HEAD: %p %p %p\n", k, curr->GetPrev(), curr, curr->GetNext());
-			printf("%i - ITEM: %p %p %p\n", k, curr->GetPrev(), curr, curr->GetNext());
+			cout << k << " - ITEM: " << curr->GetPrev() << " " << curr << " " << curr->GetNext() << endl;
 			curr = curr->GetNext();
 			k++;
 		}
-		printf("%i - TAIL: %p %p %p\n",k, curr->GetPrev(), curr, curr->GetNext());*/
-		for (curr = list->head; curr; curr = curr->GetNext()) {
-			if (curr == list->head) {
-				cout << "HEAD:\nCurr: " << curr << "\nNext: " << curr->GetNext() << "\n\n" << endl;
-			}
-			else if (curr == list->tail) {
-				cout << "TAIL:\nPrev: " << curr->GetPrev() << "\nCurr: " << curr << "\n\n" << endl;
-			}
-			else {
-				cout << "ITEM:\nPrev: " << curr->GetPrev() << "\nCurr: " << curr << "\nNext: " << curr->GetNext() << "\n\n";
-			}
-		}
+		cout << k << " - TAIL: " << curr->GetPrev() << " " << curr << " " << curr->GetNext();
 	}
-	else printf("List empty\n\n");
+	else if (len == 1) {
+		cout << "1 - HEAD: " << curr->GetPrev() << " " << curr << " " << curr->GetNext();
+	}
+	else cout << "\nList empty";
 }
 
 Item* List::GetItem( List* list, int index) {

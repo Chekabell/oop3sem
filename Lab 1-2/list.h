@@ -9,6 +9,8 @@ private:
     Item* tail;
 public:
     List(Item*, Item*);
+    List(Item*);
+    List();
     ~List();
     void SetHead(Item*);
     void SetTail(Item*);

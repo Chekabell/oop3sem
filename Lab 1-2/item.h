@@ -10,6 +10,9 @@ private:
     Item* next;
     Item* prev;
 public:
+    Item(Item*, Item*);
+    Item(Item*);
+    Item();
     ~Item();
     void SetNext(Item*);
     void SetPrev(Item*);

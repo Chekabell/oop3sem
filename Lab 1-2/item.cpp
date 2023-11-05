@@ -2,9 +2,35 @@
 #include <stdio.h>
 #include "item.h"
 
+Item::Item(Item* n, Item* p) {
+	SetNext(n);
+	SetPrev(p);
+}
+
+Item::Item(Item* no) {
+	SetNext(NULL);
+	SetPrev(NULL);
+}
+
+Item::Item() {
+	SetNext(NULL);
+	SetPrev(NULL);
+}
+
 Item::~Item() {
-	next->prev = prev;
-	prev->next = next;
+	if (next == NULL && prev == NULL);
+	else if (prev == NULL) {
+		next->prev = NULL;
+		next = NULL;
+	}
+	else if (next == NULL) {
+		prev->next = NULL;
+		prev = NULL;
+	}
+	else {
+		next->prev = prev;
+		prev->next = next;
+	}
 }
 
 void Item::SetNext(Item* n) {
