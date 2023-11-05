@@ -127,8 +127,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="list.c" />
-    <ClCompile Include="main.c" />
+    <ClCompile Include="item.cpp" />
+    <ClCompile Include="list.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="subj.c" />
   </ItemGroup>
   <ItemGroup>

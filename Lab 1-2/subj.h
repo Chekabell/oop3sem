@@ -1,4 +1,4 @@
-#ifndef SUBJ_H
+/*#ifndef SUBJ_H
 #define SUBJ_M
 
 #include "list.h"
@@ -94,4 +94,4 @@ void Switch(struct List*, int);
 void SearchYears(struct List*, int, int);
 
 #endif
-#pragma once
+#pragma once*/

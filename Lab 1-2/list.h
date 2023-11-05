@@ -1,24 +1,28 @@
 #ifndef LIST_H
 #define LIST_M
 
-#include "item.h"
-
-struct List {
-    struct Item* head;
-    struct Item* tail;
+class List {
+    friend class Item;
+    private:
+        Item* head;
+        Item* tail;
+    public:
+        List(Item*, Item*);
+        ~List();
+        Item* GetHead();
+        Item* GetTail();
+        void SetHead(Item*);
+        void SetTail(Item*);
+        void Add(List*, Item*);
+        int Count(List*);
+        void PrintList(List*);
+        Item* GetItem(List*, int);
+        int GetIndex(List*, Item*);
+        Item* Remove(List*, int);
+        void Delete(List*, int);
+        void Clear(List*);
+        void Insert(List*, Item*, int);
 };
-
-void Add(struct List*, struct Item*);
-int Count(struct List*);
-void PrintList(struct List*);
-struct Item* GetItem(struct List*, int);
-int GetIndex(struct List*, struct Item*);
-struct Item* Remove(struct List*, int);
-void Delete(struct List*, int);
-void Clear(struct List*);
-void Insert(struct List*, struct Item*, int);
-
-
 
 #endif
 #pragma once

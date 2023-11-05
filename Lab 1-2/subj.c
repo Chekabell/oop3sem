@@ -3,7 +3,7 @@
 #include <string.h>
 #include "subj.h"
 
-struct Base* Create(enum ItemType t) {
+/*struct Base* Create(enum ItemType t) {
 	struct Base* p = NULL;
 	switch (t) {
 		case Plant:
@@ -314,4 +314,4 @@ void SearchYears(struct List* list, int lborder, int rborder) {
 			PrintObject(tmp);
 		}
 	}
-}
+}*/
