@@ -3,20 +3,21 @@
 #include <string.h>
 #include "subj.h"
 
-/*struct Base* Create(enum ItemType t) {
-	struct Base* p = NULL;
+
+Base* SubjList::Create(enum ItemType t) {
+	Base* p = NULL;
 	switch (t) {
 		case Plant:
-			p = (struct Base*)calloc(1, sizeof(struct Plant));
+			p = (Base*)new class Plant;
 			break;
 		case Fish:
-			p = (struct Base*)calloc(1, sizeof(struct Fish));
+			p = (Base*)new class Fish;
 			break;
 		case Bird:
-			p = (struct Base*)calloc(1, sizeof(struct Bird));
+			p = (Base*)new class Bird;
 			break;
 		case Animal:
-			p = (struct Base*)calloc(1, sizeof(struct Animal));
+			p = (Base*)new class Animal;
 			break;
 	}
 	if (p) p->type = t;
@@ -314,4 +315,4 @@ void SearchYears(struct List* list, int lborder, int rborder) {
 			PrintObject(tmp);
 		}
 	}
-}*/
+}

@@ -95,8 +95,7 @@ int List::GetIndex(Item* item) {
 	for (curr = head, i = 0; curr != item || curr!= NULL; curr = curr->GetNext()) {
 		i++;
 	}
-	if (curr) return i;
-	else return -1;
+	return curr ? i : -1;
 }
 
 Item* List::Remove(int i) {

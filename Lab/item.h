@@ -9,7 +9,7 @@ class List;
 
 class Item {
     friend class List;
-private:
+protected:
     List* list;
     Item* next;
     Item* prev;

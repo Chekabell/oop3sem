@@ -1,6 +1,6 @@
 #include "stdio.h"
 #include "stdlib.h"
-#include "list.h"
+#include "subj.h"
 
 const char* const Menu[10] = {"(none)", "add","count","print list","delete","insert","clear","exit" };
 
@@ -16,7 +16,7 @@ int DoMenu(const char* const* s, int max) {
 }
 
 int main(void) {
-    List list{ NULL,NULL };
+    List list{};
     Item* item = NULL;
     int key = 0, index = 0, typ = 0;
     int lborder = 0, rborder = 0;

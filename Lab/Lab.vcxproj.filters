@@ -18,7 +18,7 @@
     <ClCompile Include="main.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="subj.c">
+    <ClCompile Include="subj.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="list.cpp">

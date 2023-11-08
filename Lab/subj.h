@@ -1,13 +1,17 @@
-/*#ifndef SUBJ_H
+#ifndef SUBJ_H
 #define SUBJ_M
 
 #include "list.h"
+class Item;
 
 enum ItemType { None, Plant, Fish, Bird, Animal };
+enum TypePlant { None, Herbage, Shrub, Tree };
+enum TypeReprod { None, Vegetation, Spores, Zygote };
+enum TypeFood { None, Herbivore, Aft, Meat};
 
-struct Base {
-    struct Item* next;
-    struct Item* prev;
+class Base: protected Item {
+    friend class SubjList;
+protected:
     enum ItemType type;
     char name[20];
     char area[20];
@@ -17,81 +21,50 @@ struct Base {
     int repr_age;
 };
 
-struct Plant {
-    struct Item* next;
-    struct Item* prev;
-    enum ItemType type;
-    char name[20];
-    char area[20];
-    int temperature;
-    int wetness;
-    int max_age;
-    int repr_age;
-    char type_plant[15];
-    char metod_repr[15];
-    char fruits[4];
+class Plant: protected Base {
+private:
+    enum TypePlant type_plant;
+    enum TypeReprod metod_repr;
+    bool fruits;
 };
 
-struct Fish {
-    struct Item* next;
-    struct Item* prev;
-    enum ItemType type;
-    char name[20];
-    char area[20];
-    int temperature;
-    int wetness;
-    int max_age;
-    int repr_age;
-    char type_water[15];
+class Fish: protected Base {
+private:
+    bool type_water;
 };
 
-struct Bird {
-    struct Item* next;
-    struct Item* prev;
-    enum ItemType type;
-    char name[20];
-    char area[20];
-    int temperature;
-    int wetness;
-    int max_age;
-    int repr_age;
+class Bird: protected Base {
+private:
     int quan_eggs;
-    char can_fly[4];
-    char can_swim_on[4];
-    char can_swim_under[4];
+    bool can_fly;
+    bool can_swim_on;
+    bool can_swim_under;
 };
 
-struct Animal {
-    struct Item* next;
-    struct Item* prev;
-    enum ItemType type;
-    char name[20];
-    char area[20];
-    int temperature;
-    int wetness;
-    int max_age;
-    int repr_age;
-    char type_food[10];
+class Animal: protected Base {
+private:
+    enum TypeFood type_food;
 };
 
-struct Base* Create(enum ItemType);
+class SubjList {
+public:
+    Base* Create(enum ItemType);
+    void InputPlant(struct Plant*);
+    void InputFish(struct Fish*);
+    void InputBird(struct Bird*);
+    void InputAnimal(struct Animal*);
+    void InputObject(struct Base*);
+    void PrintPlant(struct Plant*);
+    void PrintFish(struct Fish*);
+    void PrintBird(struct Bird*);
+    void PrintAnimal(struct Animal*);
+    void PrintObject(struct Base*);
+    void PrintListObj(struct List*);
+    void SortName(struct List*);
+    void Switch(struct List*, int);
+    void SearchYears(struct List*, int, int);
+};
 
-void InputPlant(struct Plant*);
-void InputFish(struct Fish*);
-void InputBird(struct Bird*);
-void InputAnimal(struct Animal*);
-void InputObject(struct Base*);
-
-void PrintPlant(struct Plant*);
-void PrintFish(struct Fish*);
-void PrintBird(struct Bird*);
-void PrintAnimal(struct Animal*);
-void PrintObject(struct Base*);
-void PrintListObj(struct List*);
-
-void SortName(struct List*);
-void Switch(struct List*, int);
-void SearchYears(struct List*, int, int);
 
 #endif
-#pragma once*/
+#pragma once

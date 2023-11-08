@@ -130,7 +130,7 @@
     <ClCompile Include="item.cpp" />
     <ClCompile Include="list.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="subj.c" />
+    <ClCompile Include="subj.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="item.h" />
