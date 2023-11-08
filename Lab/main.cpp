@@ -27,27 +27,27 @@ int main(void) {
             switch (key) {
             case 1:
                 item = new Item;
-                list.Add(&list, item);
+                list.Add(item);
                 break;
             case 2:
-                cout << endl << "Count" << list.Count(&list);
+                cout << endl << "Count" << list.Count();
                 break;
             case 3:
-                list.PrintList(&list);
+                list.PrintList();
                 break;
             case 4:
                 cout << endl << "Enter index: ";
                 cin >> index;
-                list.Delete(&list, index-1);
+                list.Delete(index);
                 break;
             case 5:
                 cout << "Enter index: ";
                 cin >> index;
                 item = new Item;
-                list.Insert(&list, (Item*)item, index-1);
+                list.Insert(item, index);
                 break;
             case 6:
-                list.Clear(&list);
+                list.Clear();
                 break;
             case 7:
                 return 0;
