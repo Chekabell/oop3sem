@@ -3,28 +3,26 @@
 #include "item.h"
 
 class List {
-    friend class Item;
 private:
     Item* head;
     Item* tail;
 public:
-    List(Item*, Item*);
-    List(Item*);
+    List(const List*);
     List();
     ~List();
     void SetHead(Item*);
     void SetTail(Item*);
     Item* GetHead() const;
     Item* GetTail() const;
-    void Add(List*, Item*);
-    int Count(List*);
-    void PrintList(List*);
-    Item* GetItem(List*, int);
-    int GetIndex(List*, Item*);
-    Item* Remove(List*, int);
-    void Delete(List*, int);
-    void Clear(List*);
-    void Insert(List*, Item*, int);
+    void Add(Item*);
+    int Count();
+    void PrintList();
+    Item* GetItem(int);
+    int GetIndex(Item*);
+    Item* Remove(int);
+    void Delete(int);
+    void Clear();
+    void Insert(Item*, int);
 };
 
 #endif

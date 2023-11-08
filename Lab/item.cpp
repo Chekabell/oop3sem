@@ -1,15 +1,11 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "item.h"
+#include "list.h"
 
-Item::Item(Item* n, Item* p) {
-	SetNext(n);
-	SetPrev(p);
-}
 
-Item::Item(Item* no) {
-	SetNext(NULL);
-	SetPrev(NULL);
+Item::Item(const Item* no) {
+	SetNext(no->GetNext());
+	SetPrev(no->GetPrev());
 }
 
 Item::Item() {
@@ -18,19 +14,11 @@ Item::Item() {
 }
 
 Item::~Item() {
-	if (next == NULL && prev == NULL);
-	else if (prev == NULL) {
-		next->prev = NULL;
-		next = NULL;
-	}
-	else if (next == NULL) {
-		prev->next = NULL;
-		prev = NULL;
-	}
-	else {
-		next->prev = prev;
-		prev->next = next;
-	}
+	if (list->GetIndex(this) != -1) list->Remove(list->GetIndex(this));
+}
+
+void Item::SetList(List* l) {
+	list = l;
 }
 
 void Item::SetNext(Item* n) {
@@ -39,6 +27,10 @@ void Item::SetNext(Item* n) {
 
 void Item::SetPrev(Item* p) {
 	prev = p;
+}
+
+List* Item::GetList() const {
+	return list;
 }
 
 Item* Item::GetNext() const{
