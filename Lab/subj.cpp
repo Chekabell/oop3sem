@@ -24,7 +24,7 @@ Base* SubjList::Create(enum ItemType t) {
 	return p;
 }
 
-void InputPlant(struct Plant* p) {
+void SubjList::InputPlant(class Plant* p) {
 	while (1) {
 		fflush(stdin);
 		printf("Enter name: ");
@@ -72,7 +72,7 @@ void InputPlant(struct Plant* p) {
 	};
 }
 
-void InputFish(struct Fish* p) {
+void SubjList::InputFish(class Fish* p) {
 	while (1) {
 		fflush(stdin);
 		printf("Enter name: ");
@@ -110,7 +110,7 @@ void InputFish(struct Fish* p) {
 	};
 }
 
-void InputBird(struct Bird* p) {
+void SubjList::InputBird(class Bird* p) {
 	while (1) {
 		fflush(stdin);
 		printf("Enter name: ");
@@ -163,7 +163,7 @@ void InputBird(struct Bird* p) {
 	};
 }
 
-void InputAnimal(struct Animal* p) {
+void SubjList::InputAnimal(class Animal* p) {
 	while (1) {
 		fflush(stdin);
 		printf("Enter name: ");
@@ -201,7 +201,7 @@ void InputAnimal(struct Animal* p) {
 	};
 }
 
-void InputObject(struct Base* p) {
+void SubjList::InputObject(class Base* p) {
 	if (p)
 		switch (p->type) {
 		case Plant:
@@ -222,7 +222,7 @@ void InputObject(struct Base* p) {
 	else printf("Error: null pointer!\n");
 }
 
-void PrintPlant(struct Plant* p) {
+void SubjList::PrintPlant(class Plant* p) {
 	printf("\nName: %s\nArea: %s\n", p->name, p->area);
 	printf("Temperature: %i\nWetness: %i\n", p->temperature, p->wetness);
 	printf("Max age: %i\nReprodactive age: %i\n", p->max_age, p->repr_age);
@@ -230,14 +230,14 @@ void PrintPlant(struct Plant* p) {
 	printf("Presence of fruits: %s\n", p->fruits);
 }
 
-void PrintFish(struct Fish* p) {
+void SubjList::PrintFish(class Fish* p) {
 	printf("\nName: %s\nArea: %s\n", p->name, p->area);
 	printf("Temperature: %i\nWetness: %i\n", p->temperature, p->wetness);
 	printf("Max age: %i\nReprodactive age: %i\n", p->max_age, p->repr_age);
 	printf("Type water: %s\n", p->type_water);
 }
 
-void PrintBird(struct Bird* p) {
+void SubjList::PrintBird(class Bird* p) {
 	printf("\nName: %s\nArea: %s\n", p->name, p->area);
 	printf("Temperature: %i\nWetness: %i\n", p->temperature, p->wetness);
 	printf("Max age: %i\nReprodactive age: %i\n", p->max_age, p->repr_age);
@@ -245,14 +245,14 @@ void PrintBird(struct Bird* p) {
 	printf("Can swim on water: %s\nCan swim under water: %s\n", p->can_swim_on, p->can_swim_under);
 }
 
-void PrintAnimal(struct Animal* p) {
+void SubjList::PrintAnimal(class Animal* p) {
 	printf("\nName: %s\nArea: %s\n", p->name, p->area);
 	printf("Temperature: %i\nWetness: %i\n", p->temperature, p->wetness);
 	printf("Max age: %i\nReprodactive age: %i\n", p->max_age, p->repr_age);
 	printf("Type food: %s\n", p->type_food);
 }
 
-void PrintObject(struct Base* p) {
+void SubjList::PrintObject(Base* p) {
 	if (p)
 		switch (p->type) {
 		case Plant:
@@ -277,7 +277,7 @@ void PrintObject(struct Base* p) {
 	else printf("Error: null pointer!\n");
 }
 
-void PrintListObj(struct List* list) {
+void SubjList::PrintListObj(List* list) {
 	struct Item* p = list->head;
 	if (list)
 		if (p)
@@ -287,12 +287,12 @@ void PrintListObj(struct List* list) {
 	else printf("ERROR: wrong list!\n");
 }
 
-void Switch(struct List* list, int j) {
+void SubjList::Switch(List* list, int j) {
 	struct Item* a = Remove(list, j);
 	Insert(list, a, j + 1);
 }
 
-void SortName(struct List* list) {
+void SubjList::SortName(List* list) {
 	int i, j, len = Count(list);
 	struct Base* p1, * p2;
 	for (i = 0; i <= len; i++) {
@@ -306,7 +306,7 @@ void SortName(struct List* list) {
 	}
 }
 
-void SearchYears(struct List* list, int lborder, int rborder) {
+void SubjList::SearchYears(List* list, int lborder, int rborder) {
 	struct Item* curr;
 	struct Base* tmp = NULL;
 	for (curr = list->head; curr; curr = curr->next) {

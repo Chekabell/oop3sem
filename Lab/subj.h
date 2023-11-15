@@ -9,7 +9,7 @@ enum TypePlant { None, Herbage, Shrub, Tree };
 enum TypeReprod { None, Vegetation, Spores, Zygote };
 enum TypeFood { None, Herbivore, Aft, Meat};
 
-class Base: protected Item {
+class Base: public Item {
     friend class SubjList;
 protected:
     enum ItemType type;
@@ -46,23 +46,24 @@ private:
     enum TypeFood type_food;
 };
 
-class SubjList {
+
+class SubjList: public List {
 public:
     Base* Create(enum ItemType);
-    void InputPlant(struct Plant*);
-    void InputFish(struct Fish*);
-    void InputBird(struct Bird*);
-    void InputAnimal(struct Animal*);
-    void InputObject(struct Base*);
-    void PrintPlant(struct Plant*);
-    void PrintFish(struct Fish*);
-    void PrintBird(struct Bird*);
-    void PrintAnimal(struct Animal*);
-    void PrintObject(struct Base*);
-    void PrintListObj(struct List*);
-    void SortName(struct List*);
-    void Switch(struct List*, int);
-    void SearchYears(struct List*, int, int);
+    void InputPlant(class Plant*);
+    void InputFish(class Fish*);
+    void InputBird(class Bird*);
+    void InputAnimal(class Animal*);
+    void InputObject(class Base*);
+    void PrintPlant(class Plant*);
+    void PrintFish(class Fish*);
+    void PrintBird(class Bird*);
+    void PrintAnimal(class Animal*);
+    void PrintObject(Base*);
+    void PrintListObj(List*);
+    void SortName(List*);
+    void Switch(List*, int);
+    void SearchYears(List*, int, int);
 };
 
 
