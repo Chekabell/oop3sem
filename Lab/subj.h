@@ -59,10 +59,6 @@ public:
 class SubjList: public List {
     friend class Base;
 private:
-    void InputPlant(class Plant*);
-    void InputFish(class Fish*);
-    void InputBird(class Bird*);
-    void InputAnimal(class Animal*);
     void Input(class Base*);
     void Print(void);
     void PrintListObj(List*);

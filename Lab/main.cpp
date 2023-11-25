@@ -29,7 +29,10 @@ int main(void) {
             switch (key) {
             case 1:
                 typ = DoMenu(TypeObject, 4);
-                item->Create(typ);
+                    if (typ) {
+                        item->Create(typ);
+                        list.Add(item);
+                    }
                 break;
             case 2:
                 cout << endl << "Count" << list.Count();
