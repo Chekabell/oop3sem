@@ -57,7 +57,7 @@ public:
 
 
 class SubjList: public List {
-private :
+private:
     Base* Create(enum ItemType);
     void InputPlant(class Plant*);
     void InputFish(class Fish*);
