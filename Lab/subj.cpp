@@ -1,8 +1,7 @@
 #include <string.h>
 #include "subj.h"
 
-
-Base* SubjList::Create(enum ItemType t) {
+Base* Base::Create(ItemType t) {
 	Base* p = NULL;
 	switch (t) {
 		case Plant:
@@ -20,6 +19,29 @@ Base* SubjList::Create(enum ItemType t) {
 	}
 	if (p) p->type = t;
 	return p;
+}
+
+void Base::Input(int typ) {
+	cin >> this->name;
+	cin >> this->area;
+	cin >> this->temperature;
+	cin >> this->wetness;
+	cin >> this->max_age;
+	cin >> this->repr_age;
+	switch (p->type) {
+	case Plant:
+		((class Plant*)p)->Input();
+		break;
+	case Fish:
+		((class Fish*)p)->Input();
+		break;
+	case Bird:
+		((class Bird*)p)->Input();
+		break;
+	case Animal:
+		((class Animal*)p)->Input();
+		break;
+	}
 }
 
 void Plant::Print(void) {
@@ -64,29 +86,6 @@ void Plant::Input(void) {
 	cin >> i;
 	if (i) fruits = true;
 	else fruits = false;
-}
-
-void Base::Input(Base* p){
-	cin >> p->name;
-	cin >> p->area;
-	cin >> p->temperature;
-	cin >> p->wetness;
-	cin >> p->max_age;
-	cin >> p->repr_age;
-	switch (p->type) {
-	case Plant:
-		((class Plant*)p)->Input();
-		break;
-	case Fish:
-		((class Fish*)p)->Input();
-		break;
-	case Bird:
-		((class Bird*)p)->Input();
-		break;
-	case Animal:
-		((class Animal*)p)->Input();
-		break;
-	}
 }
 
 void Base::Print(void) {

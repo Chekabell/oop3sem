@@ -8,8 +8,8 @@ enum TypePlant { Herbage = 1, Shrub, Tree };
 enum TypeReprod { Vegetation = 1, Spores, Zygote };
 enum TypeFood { Herbivore = 1, Aft, Meat };
 
+
 class Base: public Item {
-    friend class SubjList;
     ItemType type;
     char name[20];
     char area[20];
@@ -18,7 +18,8 @@ class Base: public Item {
     int max_age;
     int repr_age;
 public:
-    void Input(Base*);
+    Base* Create(enum ItemType);
+    void Input(int);
     void Print(void);
 };
 
@@ -55,10 +56,9 @@ public:
     void Print(void);
 };
 
-
 class SubjList: public List {
+    friend class Base;
 private:
-    Base* Create(enum ItemType);
     void InputPlant(class Plant*);
     void InputFish(class Fish*);
     void InputBird(class Bird*);
@@ -70,6 +70,8 @@ private:
     void Switch(List*, int);
     void SearchYears(List*, int, int);
 };
+
+
 
 
 #endif
