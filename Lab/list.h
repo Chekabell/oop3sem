@@ -1,6 +1,28 @@
 #ifndef LIST_H
 #define LIST_M
-#include "item.h"
+#include <iostream>
+using std::cout;
+using std::cin;
+using std::endl;
+
+class Item {
+    friend class List;
+protected:
+    List* list;
+    Item* next;
+    Item* prev;
+public:
+    Item(const Item*);
+    Item();
+    ~Item();
+    void SetList(List*);
+    void SetNext(Item*);
+    void SetPrev(Item*);
+    Item* GetNext() const;
+    Item* GetPrev() const;
+    List* GetList() const;
+};
+
 
 class List {
 private:

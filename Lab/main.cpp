@@ -3,6 +3,8 @@
 #include "subj.h"
 
 const char* const Menu[10] = {"(none)", "add","count","print list","delete","insert","clear","exit" };
+const char* const TypeObject[5] = { "(none)", "Plant","Fish","Bird","Animal" };
+
 
 int DoMenu(const char* const* s, int max) {
     int i = 0;
@@ -17,7 +19,7 @@ int DoMenu(const char* const* s, int max) {
 
 int main(void) {
     List list{};
-    Item* item = NULL;
+    Base* item = NULL;
     int key = 0, index = 0, typ = 0;
     int lborder = 0, rborder = 0;
     while (1) {
@@ -26,8 +28,9 @@ int main(void) {
         if (key) {
             switch (key) {
             case 1:
-                item = new Item;
-                list.Add(item);
+                typ = DoMenu(TypeObject, 4);
+                item =  (*item).Create(typ);
+                list.Add((Item*)item);
                 break;
             case 2:
                 cout << endl << "Count" << list.Count();

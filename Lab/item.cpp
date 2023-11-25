@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "list.h"
 
 
 Item::Item(const Item* no) {
