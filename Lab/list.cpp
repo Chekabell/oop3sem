@@ -97,21 +97,21 @@ int List::Count() {
 void List::PrintList() {
 	int k = 1, len = Count();
 	Item* curr = head;
-	if(len) cout << "\n\t\tPREV\t\t CURR\t\t NEXT" << endl;
+	if(len) std::cout << "\n\t\tPREV\t\t CURR\t\t NEXT" << std::endl;
 	if (len > 1) {
-		cout << "0 - HEAD: " << curr->GetPrev() << " " << curr << " " << curr->GetNext() << endl;
+		std::cout << "0 - HEAD: " << curr->GetPrev() << " " << curr << " " << curr->GetNext() << std::endl;
 		curr = curr->GetNext();
 		while (curr->GetNext()) {
-			cout << k << " - ITEM: " << curr->GetPrev() << " " << curr << " " << curr->GetNext() << endl;
+			std::cout << k << " - ITEM: " << curr->GetPrev() << " " << curr << " " << curr->GetNext() << std::endl;
 			curr = curr->GetNext();
 			k++;
 		}
-		cout << k << " - TAIL: " << curr->GetPrev() << " " << curr << " " << curr->GetNext();
+		std::cout << k << " - TAIL: " << curr->GetPrev() << " " << curr << " " << curr->GetNext();
 	}
 	else if (len == 1) {
-		cout << "0 - HEAD: " << curr->GetPrev() << " " << curr << " " << curr->GetNext();
+		std::cout << "0 - HEAD: " << curr->GetPrev() << " " << curr << " " << curr->GetNext();
 	}
-	else cout << "\nList empty";
+	else std::cout << "\nList empty";
 }
 
 Item* List::GetItem(int index) {

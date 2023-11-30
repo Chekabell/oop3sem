@@ -1,398 +1,290 @@
 #include <string.h>
 #include "subj.h"
 
-Base* Base::Create(ItemType t) {
+Base* Base::Create(int t) {
 	Base* p = NULL;
 	switch (t) {
-		case Plant:
+	case 1:
 			p = (Base*)new class Plant;
+			p->type = ItemType::Plant;
 			break;
-		case Fish:
+	case 2:
 			p = (Base*)new class Fish;
+			p->type = ItemType::Fish;
 			break;
-		case Bird:
+	case 3:
 			p = (Base*)new class Bird;
+			p->type = ItemType::Bird;
 			break;
-		case Animal:
+	case 4:
 			p = (Base*)new class Animal;
+			p->type = ItemType::Animal;
 			break;
 	}
-	if (p) p->type = t;
+	if (!p) p->type = ItemType::None;
 	return p;
-}
-
-void Base::Input(int typ) {
-	cin >> this->name;
-	cin >> this->area;
-	cin >> this->temperature;
-	cin >> this->wetness;
-	cin >> this->max_age;
-	cin >> this->repr_age;
-	switch (p->type) {
-	case Plant:
-		((class Plant*)p)->Input();
-		break;
-	case Fish:
-		((class Fish*)p)->Input();
-		break;
-	case Bird:
-		((class Bird*)p)->Input();
-		break;
-	case Animal:
-		((class Animal*)p)->Input();
-		break;
-	}
-}
-
-void Plant::Print(void) {
-	cout << 
-}
-
-void SubjList::Print(void) {
-	for (Base* p = (Base*)GetHead(); p; p = (Base*)p->GetNext()) {
-		p->Print();
-	}
 }
 
 void Plant::Input(void) {
 	int i;
-	cout << "Enter type plant (1 - Herbage, 2 - Shrub, 3 - Tree): " << endl;
-	cin >> i;
+	std::cout << "Enter type plant (1 - Herbage, 2 - Shrub, 3 - Tree): " << std::endl;
+	std::cin >> i;
 	switch (i) {
 	case 1:
-		type_plant = Herbage;
+		type_plant = TypePlant::Herbage;
 		break;
 	case 2:
-		type_plant = Shrub;
+		type_plant = TypePlant::Shrub;
 		break;
 	case 3:
-		type_plant = Tree;
+		type_plant = TypePlant::Tree;
+		break;
+	default:
+		type_plant = TypePlant::None;
 		break;
 	}
-	cout << "Enter type metod reproduction (1 - Vegetation, 2 - Spores, 3 - Zygote): " << endl;
-	cin >> i;
+	std::cout << "Enter type metod reproduction (1 - Vegetation, 2 - Spores, 3 - Seeds): " << std::endl;
+	std::cin >> i;
 	switch (i) {
 	case 1:
-		metod_repr = Vegetation;
+		metod_repr = TypeReprod::Vegetation;
 		break;
 	case 2:
-		metod_repr = Spores;
+		metod_repr = TypeReprod::Spores;
 		break;
 	case 3:
-		metod_repr = Zygote;
+		metod_repr = TypeReprod::Seeds;
+		break;
+	default:
+		metod_repr = TypeReprod::None;
 		break;
 	}
-	cout << "Enter presence of fruits (0 - no, 1 - yes):" << endl;
-	cin >> i;
+	std::cout << "Enter presence of fruits (0 - no, 1 - yes):" << std::endl;
+	std::cin >> i;
 	if (i) fruits = true;
 	else fruits = false;
 }
 
-void Base::Print(void) {
+void Fish::Input(void) {
+	int i;
+	std::cout << "Enter type water (0 - marine, 1 - fresh):" << std::endl;
+	std::cin >> i;
+	if (i) type_water = true;
+	else type_water = false;
+}
 
-	cout << name << endl << area << endl;
-	cout << temperature << endl << wetness << endl;
-	cout << max_age << endl << repr_age << endl;
-	switch (type) {
-	case Plant:
-		((class Plant*)this) -> Print();
+void Bird::Input(void) {
+	int i;
+	std::cout << "Enter quantity of eggs in laying" << std::endl;
+	std::cin >> quan_eggs;
+	std::cout << "Enter ability fly (0 - no, 1 - yes):" << std::endl;
+	std::cin >> i;
+	if (i) can_fly = true;
+	else can_fly = false;
+	std::cout << "Enter ability swim on water (0 - no, 1 - yes):" << std::endl;
+	std::cin >> i;
+	if (i) can_swim_on = true;
+	else can_swim_on = false;
+	std::cout << "Enter ability swim under water (0 - no, 1 - yes):" << std::endl;
+	std::cin >> i;
+	if (i) can_swim_under = true;
+	else can_swim_under = false;
+}
+
+void Animal::Input(void) {
+	int i;
+	std::cout << "Enter type food (1 - Herbivore, 2 - Aft, 3 - Meat): " << std::endl;
+	std::cin >> i;
+	switch (i) {
+	case 1:
+		type_food = TypeFood::Herbivore;
 		break;
-	case Fish:
-		((class Fish*)this)->Print();
+	case 2:
+		type_food = TypeFood::Aft;
 		break;
-	case Bird:
-		((class Bird*)this)->Print();
-		break;
-	case Animal:
-		((class Animal*)this)->Print();
+	case 3:
+		type_food = TypeFood::Meat;
 		break;
 	default:
-		cout << "Unknown type" << endl;
+		type_food = TypeFood::None;
 		break;
 	}
 }
 
-void SubjList::InputPlant(class Plant* p) {
-	while (1) {
-		fflush(stdin);
-		printf("Enter name: ");
-		if (scanf_s("%s", p->name, (unsigned)sizeof(p->name))) break;
-	};
-	while (1) {
-		fflush(stdin);
-		printf("Enter area: ");
-		if (scanf_s("%s", p->area, (unsigned)sizeof(p->area))) break;
-	};
-	while (1) {
-		fflush(stdin);
-		printf("Enter temperature: ");
-		if (scanf_s("%i", &p->temperature)) break;
-	};
-	while (1) {
-		fflush(stdin);
-		printf("Enter wetness: ");
-		if (scanf_s("%i", &p->wetness)) break;
-	};
-	while (1) {
-		fflush(stdin);
-		printf("Enter maximal age: ");
-		if (scanf_s("%i", &p->max_age)) break;
-	};
-	while (1) {
-		fflush(stdin);
-		printf("Enter reprodactive age: ");
-		if (scanf_s("%i", &p->repr_age)) break;
-	};
-	while (1) {
-		fflush(stdin);
-		printf("Enter type plant (1 - Herbage, 2 - Shrub, 3 - Tree): ");
-		if (scanf_s("%i", p->type_plant)) break;
-	};
-	while (1) {
-		fflush(stdin);
-		printf("Enter metod reprodaction (1 - Vegetation, 2 - Spores, 3 - Zygote): ");
-		if (scanf_s("%i", p->metod_repr)) break;
-	};
-	while (1) {
-		fflush(stdin);
-		printf("Enter presence of fruits (0 - no, 1 - yes): ");
-		if (scanf_s("%i", p->fruits)) break;
-	};
+void Base::Input() {
+	std::cout << "Enter name: ";
+	std::cin >> name;
+	std::cout << "Enter area: ";
+	std::cin >> area;
+	std::cout << "Enter temperature: ";
+	std::cin >> temperature;
+	std::cout << "Enter wetness: ";
+	std::cin >> wetness;
+	std::cout << "Enter maximal age: ";
+	std::cin >> max_age;
+	std::cout << "Enter reproductive age: ";
+	std::cin >> repr_age;
+	switch (type) {
+	case ItemType::Plant:
+		((class Plant*)this)->Input();
+		break;
+	case ItemType::Fish:
+		((class Fish*)this)->Input();
+		break;
+	case ItemType::Bird:
+		((class Bird*)this)->Input();
+		break;
+	case ItemType::Animal:
+		((class Animal*)this)->Input();
+		break;
+	default:
+		std::cout << "Unknown type object" << std::endl;
+	}
 }
 
-void SubjList::InputFish(class Fish* p) {
-	while (1) {
-		fflush(stdin);
-		printf("Enter name: ");
-		if (scanf_s("%s", p->name, (unsigned)sizeof(p->name))) break;
-	};
-	while (1) {
-		fflush(stdin);
-		printf("Enter area: ");
-		if (scanf_s("%s", p->area, (unsigned)sizeof(p->area))) break;
-	};
-	while (1) {
-		fflush(stdin);
-		printf("Enter temperature: ");
-		if (scanf_s("%i", &p->temperature)) break;
-	};
-	while (1) {
-		fflush(stdin);
-		printf("Enter wetness: ");
-		if (scanf_s("%i", &p->wetness)) break;
-	};
-	while (1) {
-		fflush(stdin);
-		printf("Enter maximal age: ");
-		if (scanf_s("%i", &p->max_age)) break;
-	};
-	while (1) {
-		fflush(stdin);
-		printf("Enter reprodactive age: ");
-		if (scanf_s("%i", &p->repr_age)) break;
-	};
-	while (1) {
-		fflush(stdin);
-		printf("Enter type water (0 - salt, 1 - not salt): ");
-		if (scanf_s("%i", p->type_water)) break;
-	};
+
+void Plant::Print(void) {
+	std::cout << "Type plant: ";
+	switch (type_plant) {
+	case TypePlant::Herbage:
+		std::cout << "Herbage" << std::endl;
+		break;
+	case TypePlant::Shrub:
+		std::cout << "Shrub" << std::endl;
+		break;
+	case TypePlant::Tree:
+		std::cout << "Tree" << std::endl;
+		break;
+	}
+	std::cout << "Metor reproduction: ";
+	switch (metod_repr) {
+	case TypeReprod::Vegetation:
+		std::cout << "Vegetation" << std::endl;
+		break;
+	case TypeReprod::Spores:
+		std::cout << "Spores" << std::endl;
+		break;
+	case TypeReprod::Seeds:
+		std::cout << "Seeds" << std::endl;
+		break;
+	}
+	std::cout << "Available fruits: ";
+	if (fruits) std::cout << "yes" << std::endl;
+	else std::cout << "no" << std::endl;
 }
 
-void SubjList::InputBird(class Bird* p) {
-	while (1) {
-		fflush(stdin);
-		printf("Enter name: ");
-		if (scanf_s("%s", p->name, (unsigned)sizeof(p->name))) break;
-	};
-	while (1) {
-		fflush(stdin);
-		printf("Enter area: ");
-		if (scanf_s("%s", p->area, (unsigned)sizeof(p->area))) break;
-	};
-	while (1) {
-		fflush(stdin);
-		printf("Enter temperature: ");
-		if (scanf_s("%i", &p->temperature)) break;
-	};
-	while (1) {
-		fflush(stdin);
-		printf("Enter wetness: ");
-		if (scanf_s("%i", &p->wetness)) break;
-	};
-	while (1) {
-		fflush(stdin);
-		printf("Enter maximal age: ");
-		if (scanf_s("%i", &p->max_age)) break;
-	};
-	while (1) {
-		fflush(stdin);
-		printf("Enter reprodactive age: ");
-		if (scanf_s("%i", &p->repr_age)) break;
-	};
-	while (1) {
-		fflush(stdin);
-		printf("Enter quantity eggs: ");
-		if (scanf_s("%i", &p->quan_eggs)) break;
-	};
-	while (1) {
-		fflush(stdin);
-		printf("Enter can fly: ");
-		if (scanf_s("%s", p->can_fly, (unsigned)sizeof(p->can_fly))) break;
-	};
-	while (1) {
-		fflush(stdin);
-		printf("Enter can swim on water: ");
-		if (scanf_s("%s", p->can_swim_on, (unsigned)sizeof(p->can_swim_on))) break;
-	};
-	while (1) {
-		fflush(stdin);
-		printf("Enter can swim under water: ");
-		if (scanf_s("%s", p->can_swim_under, (unsigned)sizeof(p->can_swim_under))) break;
-	};
+void Fish::Print(void) {
+	std::cout << "Type water: ";
+	if (type_water) std::cout << "fresh" << std::endl;
+	else std::cout << "marine" << std::endl;
 }
 
-void SubjList::InputAnimal(class Animal* p) {
-	while (1) {
-		fflush(stdin);
-		printf("Enter name: ");
-		if (scanf_s("%s", p->name, (unsigned)sizeof(p->name))) break;
-	};
-	while (1) {
-		fflush(stdin);
-		printf("Enter area: ");
-		if (scanf_s("%s", p->area, (unsigned)sizeof(p->area))) break;
-	};
-	while (1) {
-		fflush(stdin);
-		printf("Enter temperature: ");
-		if (scanf_s("%i", &p->temperature)) break;
-	};
-	while (1) {
-		fflush(stdin);
-		printf("Enter wetness: ");
-		if (scanf_s("%i", &p->wetness)) break;
-	};
-	while (1) {
-		fflush(stdin);
-		printf("Enter maximal age: ");
-		if (scanf_s("%i", &p->max_age)) break;
-	};
-	while (1) {
-		fflush(stdin);
-		printf("Enter reprodactive age: ");
-		if (scanf_s("%i", &p->repr_age)) break;
-	};
-	while (1) {
-		fflush(stdin);
-		printf("Enter type food: ");
-		if (scanf_s("%s", p->type_food, (unsigned)sizeof(p->type_food))) break;
-	};
+void Bird::Print(void) {
+	std::cout << "Quantity of eggs in laying: ";
+	std::cout << quan_eggs << std::endl;
+	std::cout << "Ability fly: ";
+	if (can_fly) std::cout << "yes" << std::endl;
+	else std::cout << "no" << std::endl;
+	std::cout << "Ability swim on water: ";
+	if (can_swim_on) std::cout << "yes" << std::endl;
+	else std::cout << "no" << std::endl;
+	std::cout << "Ability swim under water: ";
+	if (can_swim_under) std::cout << "yes" << std::endl;
+	else std::cout << "no" << std::endl;
 }
 
-void SubjList::InputObject(class Base* p) {
-	if (p)
-		switch (p->type) {
-		case Plant:
-			InputPlant((struct Plant*)p);
+void Animal::Print(void) {
+	std::cout << "Type food: ";
+	switch (type_food) {
+	case TypeFood::Herbivore:
+		std::cout << "Herbivore" << std::endl;
+		break;
+	case TypeFood::Aft:
+		std::cout << "Aft" << std::endl;
+		break;
+	case TypeFood::Meat:
+		std::cout << "Meat" << std::endl;
+		break;
+	}
+}
+
+void SubjList::Print(void) {
+	for (Base* p = (Base*)GetHead(); p; p = (Base*)p->GetNext()){
+		p->Print();
+		std::cout << std::endl;
+	}
+}
+
+void Base::Print(void) {
+	if (type != ItemType::None) {
+		switch (type) {
+		case ItemType::Plant:
+			std::cout << "------------Plant------------" << std::endl;
 			break;
-		case Fish:
-			InputFish((struct Fish*)p);
+		case ItemType::Fish:
+			std::cout << "------------Fish------------" << std::endl;
 			break;
-		case Bird:
-			InputBird((struct Bird*)p);
+		case ItemType::Bird:
+			std::cout << "------------Bird------------" << std::endl;
 			break;
-		case Animal:
-			InputAnimal((struct Animal*)p);
+		case ItemType::Animal:
+			std::cout << "------------Animal------------" << std::endl;
 			break;
-		default:
-			printf("Error: unknown object type!\n");
 		}
-	else printf("Error: null pointer!\n");
-}
-
-void SubjList::PrintFish(class Fish* p) {
-	printf("\nName: %s\nArea: %s\n", p->name, p->area);
-	printf("Temperature: %i\nWetness: %i\n", p->temperature, p->wetness);
-	printf("Max age: %i\nReprodactive age: %i\n", p->max_age, p->repr_age);
-	printf("Type water: %s\n", p->type_water);
-}
-
-void SubjList::PrintBird(class Bird* p) {
-	printf("\nName: %s\nArea: %s\n", p->name, p->area);
-	printf("Temperature: %i\nWetness: %i\n", p->temperature, p->wetness);
-	printf("Max age: %i\nReprodactive age: %i\n", p->max_age, p->repr_age);
-	printf("Quantity eggs: %i\nCan fly: %s\n", p->quan_eggs, p->can_fly);
-	printf("Can swim on water: %s\nCan swim under water: %s\n", p->can_swim_on, p->can_swim_under);
-}
-
-void SubjList::PrintAnimal(class Animal* p) {
-	printf("\nName: %s\nArea: %s\n", p->name, p->area);
-	printf("Temperature: %i\nWetness: %i\n", p->temperature, p->wetness);
-	printf("Max age: %i\nReprodactive age: %i\n", p->max_age, p->repr_age);
-	printf("Type food: %s\n", p->type_food);
-}
-
-void SubjList::PrintObject(Base* p) {
-	if (p)
-		switch (p->type) {
-		case Plant:
-			printf("\n\n==------------------==\n\tPlant:\n==------------------==\n");
-			PrintPlant((struct Plant*)p);
+		std::cout << "Name: " << name << std::endl << "Area: " << area << std::endl;
+		std::cout << "Temperature: " << temperature << std::endl << "Wetness: " << wetness << std::endl;
+		std::cout << "Maximal age: " << max_age << std::endl << "Reproductive age: " << repr_age << std::endl;
+		switch (type) {
+		case ItemType::Plant:
+			((class Plant*)this)->Print();
 			break;
-		case Fish:
-			printf("\n\n==------------------==\n\tFish:\n==------------------==\n");
-			PrintFish((struct Fish*)p);
+		case ItemType::Fish:
+			((class Fish*)this)->Print();
 			break;
-		case Bird:
-			printf("\n\n==------------------==\n\tBird:\n==------------------==\n");
-			PrintBird((struct Bird*)p);
+		case ItemType::Bird:
+			((class Bird*)this)->Print();
 			break;
-		case Animal:
-			printf("\n\n==------------------==\n\tAnimal:\n==------------------==\n");
-			PrintAnimal((struct Animal*)p);
+		case ItemType::Animal:
+			((class Animal*)this)->Print();
 			break;
-		default:
-			printf("Error: unknown object type!\n");
 		}
-	else printf("Error: null pointer!\n");
+	}
 }
 
-void SubjList::PrintListObj(List* list) {
-	struct Item* p = list->head;
-	if (list)
-		if (p)
-			for (; p; p = p->next)
-				PrintObject((struct Base*)p);
-		else printf("List is empty.\n");
-	else printf("ERROR: wrong list!\n");
+int Base::GetMax_age(void) {
+	return this->max_age;
 }
 
-void SubjList::Switch(List* list, int j) {
-	struct Item* a = Remove(list, j);
-	Insert(list, a, j + 1);
+char* Base::GetName(void) {
+	return this->name;
 }
 
-void SubjList::SortName(List* list) {
-	int i, j, len = Count(list);
-	struct Base* p1, * p2;
+void SubjList::Switch(int j) {
+	Item* a = this->Remove(j);
+	this->Insert(a, j + 1);
+}
+
+void SubjList::SortName() {
+	int i, j, len = this->Count();
+	Base *p1, *p2;
 	for (i = 0; i <= len; i++) {
 		for (j = 0; j < len - 1; j++) {
-			p1 = (struct Base*)GetItem(list, j);
-			p2 = (struct Base*)GetItem(list, j + 1);
-			if (strcmp(p1->name, p2->name) > 0) {
-				Switch(list, j);
+			p1 = (Base*)this->GetItem(j);
+			p2 = (Base*)this->GetItem(j + 1);
+			if (strcmp(p1->GetName(), p2->GetName()) > 0) {
+				this->Switch(j);
 			};
 		}
 	}
 }
 
-void SubjList::SearchYears(List* list, int lborder, int rborder) {
-	struct Item* curr;
-	struct Base* tmp = NULL;
-	for (curr = list->head; curr; curr = curr->next) {
-		tmp = (struct Base*)curr;
-		if (tmp->max_age >= lborder && tmp->max_age <= rborder) {
-			PrintObject(tmp);
+void SubjList::SearchYears(int lborder, int rborder) {
+	Item* curr;
+	Base* tmp = NULL;
+	for (curr = this->GetHead(); curr; curr = curr->GetNext()) {
+		tmp = (Base*)curr;
+		if (tmp->GetMax_age() >= lborder && tmp->GetMax_age() <= rborder) {
+			tmp->Print();
 		}
 	}
 }

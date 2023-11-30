@@ -2,23 +2,23 @@
 #include "stdlib.h"
 #include "subj.h"
 
-const char* const Menu[10] = {"(none)", "add","count","print list","delete","insert","clear","exit" };
+const char* const Menu[10] = {"(none)", "add","count","print list object","delete","insert","clear","sort","Search on interval years","exit" };
 const char* const TypeObject[5] = { "(none)", "Plant","Fish","Bird","Animal" };
 
 
 int DoMenu(const char* const* s, int max) {
     int i = 0;
     for (i = 1; i <= max; i++) {
-        cout << i << " - " << s[i] << endl;
+        std::cout << i << " - " << s[i] << std::endl;
     }
-    cout << ">";
+    std::cout << ">";
     fflush(stdin);
-    cin >> i;
+    std::cin >> i;
     return i<1 || i>max ? 0 : i;
 }
 
 int main(void) {
-    List list{};
+    SubjList list{};
     Base* item = NULL;
     int key = 0, index = 0, typ = 0;
     int lborder = 0, rborder = 0;
@@ -30,37 +30,50 @@ int main(void) {
             case 1:
                 typ = DoMenu(TypeObject, 4);
                     if (typ) {
-                        item->Create(typ);
-                        list.Add(item);
+                        item = item->Create(typ);
+                        item->Input();
+                        list.Add((Item*)item);
                     }
                 break;
             case 2:
-                cout << endl << "Count" << list.Count();
+                std::cout << std::endl << "Count: " << list.Count();
                 break;
             case 3:
-                list.PrintList();
+                list.Print();
                 break;
             case 4:
-                cout << endl << "Enter index: ";
-                cin >> index;
+                std::cout << std::endl << "Enter index: ";
+                std::cin >> index;
                 list.Delete(index);
                 break;
             case 5:
-                cout << "Enter index: ";
-                cin >> index;
-                item = new Item;
-                list.Insert(item, index);
+                std::cout << "Enter index: ";
+                std::cin >> index;
+                typ = DoMenu(TypeObject, 4);
+                if (typ) {
+                    item = item->Create(typ);
+                    item->Input();
+                    list.Insert(item, index);
+                }
                 break;
             case 6:
                 list.Clear();
                 break;
             case 7:
+                list.SortName();
+                break;
+            case 8:
+                std::cout << "Ented left border and right border interval: ";
+                std::cin >> lborder >> rborder;
+                list.SearchYears(lborder, rborder);
+                break;
+            case 9:
                 return 0;
             default:
-                cout << "Wrong opinion\n" << endl;
+                std::cout << "Wrong opinion\n" << std::endl;
                 break;
             }
         }
-        cout << "\n" << endl;
+        std::cout << "\n" << std::endl;
     }
 }

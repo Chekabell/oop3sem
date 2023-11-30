@@ -3,10 +3,10 @@
 
 #include "list.h"
 
-enum ItemType { Plant = 1, Fish, Bird, Animal };
-enum TypePlant { Herbage = 1, Shrub, Tree };
-enum TypeReprod { Vegetation = 1, Spores, Zygote };
-enum TypeFood { Herbivore = 1, Aft, Meat };
+enum class ItemType { None, Plant, Fish, Bird, Animal };
+enum class TypePlant { None, Herbage, Shrub, Tree };
+enum class TypeReprod { None, Vegetation, Spores, Seeds };
+enum class TypeFood { None, Herbivore, Aft, Meat };
 
 
 class Base: public Item {
@@ -18,14 +18,16 @@ class Base: public Item {
     int max_age;
     int repr_age;
 public:
-    Base* Create(enum ItemType);
-    void Input(int);
+    Base* Create(int);
+    void Input();
     void Print(void);
+    char* GetName(void);
+    int GetMax_age(void);
 };
 
 class Plant: public Base {
-    enum TypePlant type_plant;
-    enum TypeReprod metod_repr;
+    TypePlant type_plant;
+    TypeReprod metod_repr;
     bool fruits;
 public:
     void Input(void);
@@ -50,7 +52,7 @@ public:
 };
 
 class Animal: public Base {
-    enum TypeFood type_food;
+    TypeFood type_food;
 public:
     void Input(void);
     void Print(void);
@@ -58,13 +60,11 @@ public:
 
 class SubjList: public List {
     friend class Base;
-private:
-    void Input(class Base*);
+public:
     void Print(void);
-    void PrintListObj(List*);
-    void SortName(List*);
-    void Switch(List*, int);
-    void SearchYears(List*, int, int);
+    void SortName();
+    void Switch(int);
+    void SearchYears(int, int);
 };
 
 

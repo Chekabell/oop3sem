@@ -6,7 +6,7 @@ Madagaskar
 90
 25
 5
-meat
+3
 1
 1
 Dori
@@ -15,9 +15,9 @@ forest
 80
 1000
 15
-tree
-semena
-yes
+3
+3
+1
 1
 2
 Nemo
@@ -26,7 +26,7 @@ sea
 100
 5
 1
-salt
+0
 1
 3
 Cheese
@@ -36,6 +36,6 @@ jungle
 5
 2
 2
-yes
-no
-no
+1
+0
+0

@@ -1,9 +1,6 @@
 #ifndef LIST_H
 #define LIST_M
 #include <iostream>
-using std::cout;
-using std::cin;
-using std::endl;
 
 class Item {
     friend class List;
