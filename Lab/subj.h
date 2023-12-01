@@ -11,8 +11,8 @@ enum class TypeFood { None, Herbivore, Aft, Meat };
 
 class Base: public Item {
     ItemType type;
-    char name[20];
-    char area[20];
+    std::string name;
+    std::string area;
     int temperature;
     int wetness;
     int max_age;
@@ -21,7 +21,7 @@ public:
     Base* Create(int);
     void Input();
     void Print(void);
-    char* GetName(void);
+    std::string GetName(void);
     int GetMax_age(void);
 };
 
