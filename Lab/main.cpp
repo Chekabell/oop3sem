@@ -5,7 +5,6 @@
 const char* const Menu[10] = {"(none)", "add","count","print list object","delete","insert","clear","sort","Search on interval years","exit" };
 const char* const TypeObject[5] = { "(none)", "Plant","Fish","Bird","Animal" };
 
-
 int DoMenu(const char* const* s, int max) {
     int i = 0;
     for (i = 1; i <= max; i++) {
@@ -24,7 +23,7 @@ int main(void) {
     int lborder = 0, rborder = 0;
     while (1) {
         typ = 0; 
-        key = DoMenu(Menu, 7);
+        key = DoMenu(Menu, 9);
         if (key) {
             switch (key) {
             case 1:

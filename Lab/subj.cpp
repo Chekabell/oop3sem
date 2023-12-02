@@ -10,35 +10,57 @@ Base::Base() {
 	repr_age = 0;
 }
 
-Base::~Base() {
-
+Base::~Base(){
+	((Item*)this)->~Item();
+	delete this;
 }
 
 SubjList::~SubjList() {
 	((List*)this)->~List();
+	delete this;
 }
 
-SubjList::SubjList() {
-	List(((List*)this));
+SubjList::SubjList() :List(){}
+
+Plant::Plant() {
+	type_plant = TypePlant::None;
+	metod_repr = TypeReprod::None;
+	fruits = false;
+}
+
+Fish::Fish() {
+	type_water = false;
+}
+
+
+Bird::Bird() {
+	quan_eggs = 0;
+	can_fly = false;
+	can_swim_on = false;
+	can_swim_under = false;
+}
+
+Animal::Animal() {
+	type_food = TypeFood::None;
 }
 
 Base* Base::Create(int t) {
 	Base* p = NULL;
 	switch (t) {
 	case 1:
-			p = (Base*)new class Plant;
+			p = (Base*)new Plant;
 			p->type = ItemType::Plant;
 			break;
 	case 2:
-			p = (Base*)new class Fish;
+			p = (Base*)new Fish;
 			p->type = ItemType::Fish;
 			break;
 	case 3:
-			p = (Base*)new class Bird;
+			p = (Base*)new Bird;
 			p->type = ItemType::Bird;
 			break;
 	case 4:
-			p = (Base*)new class Animal;
+			p = (Base*)new Animal;
 			p->type = ItemType::Animal;
 			break;
 	}

@@ -10,6 +10,7 @@ enum class TypeFood { None, Herbivore, Aft, Meat };
 
 
 class Base: public Item {
+private:
     ItemType type;
     std::string name;
     std::string area;
@@ -28,34 +29,42 @@ public:
 };
 
 class Plant: public Base {
+private:
     TypePlant type_plant;
     TypeReprod metod_repr;
     bool fruits;
 public:
+    Plant();
     void Input(void);
     void Print(void);
 };
 
 class Fish: public Base {
+private:
     bool type_water;
 public:
+    Fish();
     void Input(void);
     void Print(void);
 };
 
 class Bird: public Base {
+private:
     int quan_eggs;
     bool can_fly;
     bool can_swim_on;
     bool can_swim_under;
 public:
+    Bird();
     void Input(void);
     void Print(void);
 };
 
 class Animal: public Base {
+private:
     TypeFood type_food;
 public:
+    Animal();
     void Input(void);
     void Print(void);
 };
