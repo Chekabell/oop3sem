@@ -18,6 +18,8 @@ class Base: public Item {
     int max_age;
     int repr_age;
 public:
+    Base();
+    ~Base();
     Base* Create(int);
     void Input();
     void Print(void);
@@ -61,6 +63,8 @@ public:
 class SubjList: public List {
     friend class Base;
 public:
+    SubjList();
+    ~SubjList();
     void Print(void);
     void SortName();
     void Switch(int);

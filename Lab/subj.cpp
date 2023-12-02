@@ -1,5 +1,27 @@
 #include "subj.h"
 
+Base::Base() {
+	type = ItemType::None;
+	name = "unknown";
+	area = "unknown";
+	temperature = 0;
+	wetness = 0;
+	max_age = 0;
+	repr_age = 0;
+}
+
+Base::~Base() {
+
+}
+
+SubjList::~SubjList() {
+	((List*)this)->~List();
+}
+
+SubjList::SubjList() {
+	List(((List*)this));
+}
+
 Base* Base::Create(int t) {
 	Base* p = NULL;
 	switch (t) {
@@ -266,16 +288,16 @@ void Base::Print(void) {
 		std::cout << "\tMaximal age: " << max_age << std::endl << "\tReproductive age: " << repr_age << std::endl;
 		switch (type) {
 		case ItemType::Plant:
-			((class Plant*)this)->Print();
+			((Plant*)this)->Print();
 			break;
 		case ItemType::Fish:
-			((class Fish*)this)->Print();
+			((Fish*)this)->Print();
 			break;
 		case ItemType::Bird:
-			((class Bird*)this)->Print();
+			((Bird*)this)->Print();
 			break;
 		case ItemType::Animal:
-			((class Animal*)this)->Print();
+			((Animal*)this)->Print();
 			break;
 		}
 	}
