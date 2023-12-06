@@ -64,7 +64,6 @@ Base* Base::Create(int t) {
 			p->type = ItemType::Animal;
 			break;
 	}
-	if (!p) p->type = ItemType::None;
 	return p;
 }
 

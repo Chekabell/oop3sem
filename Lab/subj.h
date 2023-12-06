@@ -1,6 +1,3 @@
-#ifndef SUBJ_H
-#define SUBJ_M
-
 #include "list.h"
 
 enum class ItemType { None, Plant, Fish, Bird, Animal };
@@ -80,8 +77,3 @@ public:
     void SearchYears(int, int);
 };
 
-
-
-
-#endif
-#pragma once

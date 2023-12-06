@@ -1,5 +1,3 @@
-#ifndef LIST_H
-#define LIST_M
 #include <iostream>
 
 class Item {
@@ -44,5 +42,3 @@ public:
     void Insert(Item*, int);
 };
 
-#endif
-#pragma once

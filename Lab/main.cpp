@@ -2,8 +2,8 @@
 #include "stdlib.h"
 #include "subj.h"
 
-const char* const Menu[10] = {"(none)", "add","count","print list object","delete","insert","clear","sort","Search on interval years","exit" };
-const char* const TypeObject[5] = { "(none)", "Plant","Fish","Bird","Animal" };
+const char* const Menu[10] = {"(none)","add","count","print list object","delete","insert","clear","sort","Search on interval years","exit" };
+const char* const TypeObject[5] = {"(none)","Plant","Fish","Bird","Animal" };
 
 int DoMenu(const char* const* s, int max) {
     int i = 0;
