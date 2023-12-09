@@ -26,7 +26,7 @@ private:
 public:
     List(const List*);
     List();
-    ~List();
+    virtual ~List();
     void SetHead(Item*);
     void SetTail(Item*);
     Item* GetHead() const;

@@ -31,7 +31,7 @@ private:
     bool fruits;
 public:
     Plant();
-    ~Plant() { Base::~Base(); };
+    ~Plant();
     void Input(void) override;
     void Print(void) override;
     ItemType GetType() override;
@@ -42,7 +42,7 @@ private:
     bool type_water;
 public:
     Fish();
-    ~Fish() { Base::~Base(); };
+    ~Fish();
     void Input(void) override;
     void Print(void) override;
     ItemType GetType() override;
@@ -56,7 +56,7 @@ private:
     bool can_swim_under;
 public:
     Bird();
-    ~Bird() { Base::~Base(); };
+    ~Bird();
     void Input(void) override;
     void Print(void) override;
     ItemType GetType() override;
@@ -67,7 +67,7 @@ private:
     TypeFood type_food;
 public:
     Animal();
-    ~Animal() { Base::~Base(); };
+    ~Animal();
     void Input(void) override;
     void Print(void) override;
     ItemType GetType() override;
