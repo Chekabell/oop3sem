@@ -12,12 +12,11 @@ Base::Base() {
 
 Base::~Base(){
 	((Item*)this)->~Item();
-	delete this;
 }
+
 
 SubjList::~SubjList() {
 	((List*)this)->~List();
-	delete this;
 }
 
 SubjList::SubjList() :List(){}
@@ -45,7 +44,7 @@ Animal::Animal() {
 }
 
 Base* Base::Create(int t) {
-	Base* p = NULL;
+	Base* p = nullptr;
 	switch (t) {
 	case 1:
 			p = (Base*)new Plant;
@@ -159,7 +158,7 @@ void Animal::Input(void) {
 	}
 }
 
-void Base::Input() {
+void Base::Input(void) {
 	if (type != ItemType::None) {
 		std::cout << "Enter name: ";
 		std::cin >> name;
@@ -197,20 +196,7 @@ void Base::Input() {
 			std::cout << "Immposible reproductive age!!\n Enter again:";
 			std::cin >> repr_age;
 		}
-		switch (type) {
-		case ItemType::Plant:
-			((class Plant*)this)->Input();
-			break;
-		case ItemType::Fish:
-			((class Fish*)this)->Input();
-			break;
-		case ItemType::Bird:
-			((class Bird*)this)->Input();
-			break;
-		case ItemType::Animal:
-			((class Animal*)this)->Input();
-			break;
-		}
+		this->Input();
 	}
 	else std::cout << "Unknown type object" << std::endl;
 }
@@ -288,7 +274,7 @@ void SubjList::Print(void) {
 	}
 }
 
-void Base::Print(void) {
+void Base::Print(void) const {
 	if (type != ItemType::None) {
 		switch (type) {
 		case ItemType::Plant:
@@ -307,20 +293,7 @@ void Base::Print(void) {
 		std::cout << "\tName: " << name << std::endl << "\tArea: " << area << std::endl;
 		std::cout << "\tTemperature: " << temperature << std::endl << "\tWetness: " << wetness << std::endl;
 		std::cout << "\tMaximal age: " << max_age << std::endl << "\tReproductive age: " << repr_age << std::endl;
-		switch (type) {
-		case ItemType::Plant:
-			((Plant*)this)->Print();
-			break;
-		case ItemType::Fish:
-			((Fish*)this)->Print();
-			break;
-		case ItemType::Bird:
-			((Bird*)this)->Print();
-			break;
-		case ItemType::Animal:
-			((Animal*)this)->Print();
-			break;
-		}
+		this->Print();
 	}
 }
 

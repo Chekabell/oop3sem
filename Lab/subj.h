@@ -18,9 +18,9 @@ private:
 public:
     Base();
     ~Base();
-    Base* Create(int);
-    void Input();
-    void Print(void);
+    static Base* Create(int);
+    virtual void Input(void);
+    virtual void Print(void) const;
     std::string GetName(void);
     int GetMax_age(void);
 };

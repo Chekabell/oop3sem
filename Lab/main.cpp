@@ -18,10 +18,11 @@ int DoMenu(const char* const* s, int max) {
 
 int main(void) {
     SubjList list{};
-    Base* item = NULL;
+    Base* item = nullptr;
     int key = 0, index = 0, typ = 0;
     int lborder = 0, rborder = 0;
     while (1) {
+        item = nullptr;
         typ = 0; 
         key = DoMenu(Menu, 9);
         if (key) {
