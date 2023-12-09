@@ -44,10 +44,6 @@ Animal::Animal()
 {
 }
 
-SubjList::~SubjList() {
-	((List*)this)->~List();
-};
-
 ItemType Plant::GetType() {
 	return ItemType::Plant;
 }
@@ -319,27 +315,42 @@ void SubjList::Switch(int j) {
 	this->Insert(a, j + 1);
 }
 
+bool Base::operator > (const Base& p)
+{
+	if (name.compare(p.name) > 0) return true;
+	else return false;
+}
+
+Base& SubjList::operator [](const int i) {
+	return *(Base*)GetItem(i);
+}
+
 void SubjList::SortName() {
 	int i, j, len = this->Count();
-	Base* p1, * p2;
 	for (i = 0; i <= len; i++) {
 		for (j = 0; j < len - 1; j++) {
-			p1 = (Base*)this->GetItem(j);
-			p2 = (Base*)this->GetItem(j + 1);
-			if ((p1->name.compare(p2->name) > 0)) {
+			if ((*this)[j] > (*this)[j+1]) {
 				this->Switch(j);
 			};
 		}
 	}
 }
 
+bool Base::operator>= (const int i) {
+	if (max_age >= i) return true;
+	else return false;
+}
+
+bool Base::operator<= (const int i) {
+	if (max_age <= i) return true;
+	else return false;
+}
+
 void SubjList::SearchYears(int lborder, int rborder) {
-	Item* curr;
-	Base* tmp = NULL;
-	for (curr = this->GetHead(); curr; curr = curr->GetNext()) {
-		tmp = (Base*)curr;
-		if (tmp->max_age >= lborder && tmp->max_age <= rborder) {
-			tmp->Print();
+	int i, len = this->Count();
+	for (i = 0; i <= len; i++) {
+		if ((*this)[i] >= lborder && (*this)[i] <= rborder) {
+			((*this)[i]).Print();
 		}
 	}
 }

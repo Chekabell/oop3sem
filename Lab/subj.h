@@ -18,10 +18,13 @@ private:
 public:
     Base();
     virtual ~Base();
-    virtual ItemType GetType() = 0;
+    virtual ItemType GetType() { return ItemType::None; };
     static Base* Create(int);
     virtual void Input(void);
     virtual void Print(void);
+    bool operator > (const Base&);
+    bool operator >= (const int);
+    bool operator <= (const int);
 };
 
 class Plant : public Base {
@@ -31,7 +34,7 @@ private:
     bool fruits;
 public:
     Plant();
-    ~Plant() { Base::~Base(); };
+    ~Plant();
     void Input(void) override;
     void Print(void) override;
     ItemType GetType() override;
@@ -42,7 +45,7 @@ private:
     bool type_water;
 public:
     Fish();
-    ~Fish() { Base::~Base(); };
+    ~Fish();
     void Input(void) override;
     void Print(void) override;
     ItemType GetType() override;
@@ -56,7 +59,7 @@ private:
     bool can_swim_under;
 public:
     Bird();
-    ~Bird() { Base::~Base(); };
+    ~Bird();
     void Input(void) override;
     void Print(void) override;
     ItemType GetType() override;
@@ -67,7 +70,7 @@ private:
     TypeFood type_food;
 public:
     Animal();
-    ~Animal() { Base::~Base(); };
+    ~Animal();
     void Input(void) override;
     void Print(void) override;
     ItemType GetType() override;
@@ -81,5 +84,6 @@ public:
     void SortName();
     void Switch(int);
     void SearchYears(int, int);
+    Base& operator [](const int);
 };
 
