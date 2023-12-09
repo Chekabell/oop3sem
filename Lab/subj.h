@@ -6,7 +6,7 @@ enum class TypeReprod { None, Vegetation, Spores, Seeds };
 enum class TypeFood { None, Herbivore, Aft, Meat };
 
 
-class Base: public Item {
+class Base : public Item {
 private:
     ItemType type;
     std::string name;
@@ -18,34 +18,37 @@ private:
 public:
     Base();
     ~Base();
+    void SetType(ItemType);
     static Base* Create(int);
-    virtual void Input(void);
-    virtual void Print(void) const;
+    void Input();
+    void Print(void);
     std::string GetName(void);
     int GetMax_age(void);
 };
 
-class Plant: public Base {
+class Plant : public Base {
 private:
     TypePlant type_plant;
     TypeReprod metod_repr;
     bool fruits;
 public:
     Plant();
+    ~Plant() { Base::~Base(); };
     void Input(void);
     void Print(void);
 };
 
-class Fish: public Base {
+class Fish : public Base {
 private:
     bool type_water;
 public:
     Fish();
+    ~Fish() { Base::~Base(); };
     void Input(void);
     void Print(void);
 };
 
-class Bird: public Base {
+class Bird : public Base {
 private:
     int quan_eggs;
     bool can_fly;
@@ -53,23 +56,25 @@ private:
     bool can_swim_under;
 public:
     Bird();
+    ~Bird() { Base::~Base(); };
     void Input(void);
     void Print(void);
 };
 
-class Animal: public Base {
+class Animal : public Base {
 private:
     TypeFood type_food;
 public:
     Animal();
+    ~Animal() { Base::~Base(); };
     void Input(void);
     void Print(void);
 };
 
-class SubjList: public List {
+class SubjList : public List {
     friend class Base;
 public:
-    SubjList();
+    SubjList() : List() {};
     ~SubjList();
     void Print(void);
     void SortName();
