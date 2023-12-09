@@ -1,67 +1,77 @@
 #include "subj.h"
 
-Base::Base() {
-	type = ItemType::None;
-	name = "unknown";
-	area = "unknown";
-	temperature = 0;
-	wetness = 0;
-	max_age = 0;
-	repr_age = 0;
+
+void Base::SetType(ItemType t) {
+	type = t;
 }
 
-Base::~Base(){
-	((Item*)this)->~Item();
+Base::Base()
+	: Item()
+	, name("unknown")
+	, area("unknown")
+	, temperature(0)
+	, wetness(0)
+	, max_age(0)
+	, repr_age(0)
+{
+	SetType(ItemType::None);
 }
 
+Base::~Base() { ((Item*)this)->~Item(); };
+
+
+Plant::Plant()
+	: Base()
+	, type_plant(TypePlant::None)
+	, metod_repr(TypeReprod::None)
+	, fruits(false)
+{
+	SetType(ItemType::Plant);
+}
+
+Fish::Fish()
+	: Base()
+	, type_water(false)
+{
+	SetType(ItemType::Fish);
+}
+
+Bird::Bird()
+	: Base()
+	, quan_eggs(0)
+	, can_fly(false)
+	, can_swim_on(false)
+	, can_swim_under(false)
+{
+	SetType(ItemType::Bird);
+}
+
+Animal::Animal()
+	: Base()
+	, type_food(TypeFood::None)
+{
+	SetType(ItemType::Animal);
+}
 
 SubjList::~SubjList() {
 	((List*)this)->~List();
-}
-
-SubjList::SubjList() :List(){}
-
-Plant::Plant() {
-	type_plant = TypePlant::None;
-	metod_repr = TypeReprod::None;
-	fruits = false;
-}
-
-Fish::Fish() {
-	type_water = false;
-}
-
-
-Bird::Bird() {
-	quan_eggs = 0;
-	can_fly = false;
-	can_swim_on = false;
-	can_swim_under = false;
-}
-
-Animal::Animal() {
-	type_food = TypeFood::None;
-}
+};
 
 Base* Base::Create(int t) {
-	Base* p = nullptr;
+	Base* p = NULL;
 	switch (t) {
 	case 1:
-			p = (Base*)new Plant;
-			p->type = ItemType::Plant;
-			break;
+		p = new Plant();
+		break;
 	case 2:
-			p = (Base*)new Fish;
-			p->type = ItemType::Fish;
-			break;
+		p = new Fish();
+		break;
 	case 3:
-			p = (Base*)new Bird;
-			p->type = ItemType::Bird;
-			break;
+		p = new Bird();
+		break;
 	case 4:
-			p = (Base*)new Animal;
-			p->type = ItemType::Animal;
-			break;
+		p = new Animal();
+		break;
 	}
 	return p;
 }
@@ -158,7 +168,7 @@ void Animal::Input(void) {
 	}
 }
 
-void Base::Input(void) {
+void Base::Input() {
 	if (type != ItemType::None) {
 		std::cout << "Enter name: ";
 		std::cin >> name;
@@ -196,7 +206,20 @@ void Base::Input(void) {
 			std::cout << "Immposible reproductive age!!\n Enter again:";
 			std::cin >> repr_age;
 		}
-		this->Input();
+		switch (type) {
+		case ItemType::Plant:
+			((class Plant*)this)->Input();
+			break;
+		case ItemType::Fish:
+			((class Fish*)this)->Input();
+			break;
+		case ItemType::Bird:
+			((class Bird*)this)->Input();
+			break;
+		case ItemType::Animal:
+			((class Animal*)this)->Input();
+			break;
+		}
 	}
 	else std::cout << "Unknown type object" << std::endl;
 }
@@ -268,13 +291,13 @@ void Animal::Print(void) {
 }
 
 void SubjList::Print(void) {
-	for (Base* p = (Base*)GetHead(); p; p = (Base*)p->GetNext()){
+	for (Base* p = (Base*)GetHead(); p; p = (Base*)p->GetNext()) {
 		p->Print();
 		std::cout << std::endl;
 	}
 }
 
-void Base::Print(void) const {
+void Base::Print(void) {
 	if (type != ItemType::None) {
 		switch (type) {
 		case ItemType::Plant:
@@ -293,7 +316,20 @@ void Base::Print(void) const {
 		std::cout << "\tName: " << name << std::endl << "\tArea: " << area << std::endl;
 		std::cout << "\tTemperature: " << temperature << std::endl << "\tWetness: " << wetness << std::endl;
 		std::cout << "\tMaximal age: " << max_age << std::endl << "\tReproductive age: " << repr_age << std::endl;
-		this->Print();
+		switch (type) {
+		case ItemType::Plant:
+			((Plant*)this)->Print();
+			break;
+		case ItemType::Fish:
+			((Fish*)this)->Print();
+			break;
+		case ItemType::Bird:
+			((Bird*)this)->Print();
+			break;
+		case ItemType::Animal:
+			((Animal*)this)->Print();
+			break;
+		}
 	}
 }
 
@@ -312,7 +348,7 @@ void SubjList::Switch(int j) {
 
 void SubjList::SortName() {
 	int i, j, len = this->Count();
-	Base *p1, *p2;
+	Base* p1, * p2;
 	for (i = 0; i <= len; i++) {
 		for (j = 0; j < len - 1; j++) {
 			p1 = (Base*)this->GetItem(j);
