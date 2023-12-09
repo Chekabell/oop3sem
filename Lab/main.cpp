@@ -1,5 +1,5 @@
-#include "stdio.h"
-#include "stdlib.h"
+#include <stdlib.h>
+#include <stdio.h>
 #include "subj.h"
 
 const char* const Menu[10] = {"(none)","add","count","print list object","delete","insert","clear","sort","Search on interval years","exit" };
@@ -30,9 +30,9 @@ int main(void) {
             case 1:
                 typ = DoMenu(TypeObject, 4);
                     if (typ) {
-                        item = item->Create(typ);
+                        item = Base::Create(typ);
                         item->Input();
-                        list.Add((Item*)item);
+                        list.Add(item);
                     }
                 break;
             case 2:
@@ -51,7 +51,7 @@ int main(void) {
                 std::cin >> index;
                 typ = DoMenu(TypeObject, 4);
                 if (typ) {
-                    item = item->Create(typ);
+                    item = Base::Create(typ);
                     item->Input();
                     list.Insert(item, index);
                 }
@@ -76,4 +76,5 @@ int main(void) {
         }
         std::cout << "\n" << std::endl;
     }
+    return 0;
 }

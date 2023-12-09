@@ -1,10 +1,6 @@
 #include "subj.h"
 
 
-void Base::SetType(ItemType t) {
-	type = t;
-}
-
 Base::Base()
 	: Item()
 	, name("unknown")
@@ -14,7 +10,6 @@ Base::Base()
 	, max_age(0)
 	, repr_age(0)
 {
-	SetType(ItemType::None);
 }
 
 Base::~Base() { ((Item*)this)->~Item(); };
@@ -26,14 +21,12 @@ Plant::Plant()
 	, metod_repr(TypeReprod::None)
 	, fruits(false)
 {
-	SetType(ItemType::Plant);
 }
 
 Fish::Fish()
 	: Base()
 	, type_water(false)
 {
-	SetType(ItemType::Fish);
 }
 
 Bird::Bird()
@@ -43,19 +36,33 @@ Bird::Bird()
 	, can_swim_on(false)
 	, can_swim_under(false)
 {
-	SetType(ItemType::Bird);
 }
 
 Animal::Animal()
 	: Base()
 	, type_food(TypeFood::None)
 {
-	SetType(ItemType::Animal);
 }
 
 SubjList::~SubjList() {
 	((List*)this)->~List();
 };
+
+ItemType Plant::GetType() {
+	return ItemType::Plant;
+}
+
+ItemType Fish::GetType() {
+	return ItemType::Fish;
+}
+
+ItemType Bird::GetType() {
+	return ItemType::Bird;
+}
+
+ItemType Animal::GetType() {
+	return ItemType::Animal;
+}
 
 Base* Base::Create(int t) {
 	Base* p = NULL;
@@ -76,7 +83,47 @@ Base* Base::Create(int t) {
 	return p;
 }
 
+void Base::Input(void) {
+	std::cout << "Enter name: ";
+	std::cin >> name;
+	std::cout << "Enter area: ";
+	std::cin >> area;
+	std::cout << "Enter temperature (-200 - +100): ";
+	std::cin >> temperature;
+	while (temperature < -200 || temperature > 100) {
+		temperature = 0;
+		fflush(stdin);
+		std::cout << "Immposible temperature for life!!\n Enter again:";
+		std::cin >> temperature;
+	}
+	std::cout << "Enter wetness (0 - 100): ";
+	std::cin >> wetness;
+	while (wetness < 0 || wetness > 100) {
+		wetness = 0;
+		fflush(stdin);
+		std::cout << "Immposible wetness!!\n Enter again:";
+		std::cin >> wetness;
+	}
+	std::cout << "Enter maximal age: ";
+	std::cin >> max_age;
+	while (max_age < 0) {
+		max_age = 0;
+		fflush(stdin);
+		std::cout << "Immposible maximal age!!\n Enter again:";
+		std::cin >> max_age;
+	}
+	std::cout << "Enter reproductive age: ";
+	std::cin >> repr_age;
+	while (repr_age <= 0) {
+		repr_age = 0;
+		fflush(stdin);
+		std::cout << "Immposible reproductive age!!\n Enter again:";
+		std::cin >> repr_age;
+	}
+}
+
 void Plant::Input(void) {
+	Base::Input();
 	int i;
 	std::cout << "Enter type plant (1 - Herbage, 2 - Shrub, 3 - Tree): " << std::endl;
 	std::cin >> i;
@@ -117,6 +164,7 @@ void Plant::Input(void) {
 }
 
 void Fish::Input(void) {
+	Base::Input();
 	int i;
 	std::cout << "Enter type water (0 - marine, 1 - fresh):" << std::endl;
 	std::cin >> i;
@@ -125,6 +173,7 @@ void Fish::Input(void) {
 }
 
 void Bird::Input(void) {
+	Base::Input();
 	int i;
 	std::cout << "Enter quantity of eggs in laying" << std::endl;
 	std::cin >> quan_eggs;
@@ -149,6 +198,7 @@ void Bird::Input(void) {
 }
 
 void Animal::Input(void) {
+	Base::Input();
 	int i;
 	std::cout << "Enter type food (1 - Herbivore, 2 - Aft, 3 - Meat): " << std::endl;
 	std::cin >> i;
@@ -168,64 +218,35 @@ void Animal::Input(void) {
 	}
 }
 
-void Base::Input() {
-	if (type != ItemType::None) {
-		std::cout << "Enter name: ";
-		std::cin >> name;
-		std::cout << "Enter area: ";
-		std::cin >> area;
-		std::cout << "Enter temperature (-200 - +100): ";
-		std::cin >> temperature;
-		while (temperature < -200 || temperature > 100) {
-			temperature = 0;
-			fflush(stdin);
-			std::cout << "Immposible temperature for life!!\n Enter again:";
-			std::cin >> temperature;
-		}
-		std::cout << "Enter wetness (0 - 100): ";
-		std::cin >> wetness;
-		while (wetness < 0 || wetness > 100) {
-			wetness = 0;
-			fflush(stdin);
-			std::cout << "Immposible wetness!!\n Enter again:";
-			std::cin >> wetness;
-		}
-		std::cout << "Enter maximal age: ";
-		std::cin >> max_age;
-		while (max_age < 0) {
-			max_age = 0;
-			fflush(stdin);
-			std::cout << "Immposible maximal age!!\n Enter again:";
-			std::cin >> max_age;
-		}
-		std::cout << "Enter reproductive age: ";
-		std::cin >> repr_age;
-		while (repr_age <= 0) {
-			repr_age = 0;
-			fflush(stdin);
-			std::cout << "Immposible reproductive age!!\n Enter again:";
-			std::cin >> repr_age;
-		}
-		switch (type) {
-		case ItemType::Plant:
-			((class Plant*)this)->Input();
-			break;
-		case ItemType::Fish:
-			((class Fish*)this)->Input();
-			break;
-		case ItemType::Bird:
-			((class Bird*)this)->Input();
-			break;
-		case ItemType::Animal:
-			((class Animal*)this)->Input();
-			break;
-		}
+void SubjList::Print(void) {
+	for (Base* p = (Base*)GetHead(); p; p = (Base*)p->GetNext()) {
+		p->Print();
+		std::cout << std::endl;
 	}
-	else std::cout << "Unknown type object" << std::endl;
 }
 
+void Base::Print(void) {
+	switch (GetType()) {
+	case ItemType::Plant:
+		std::cout << "------------Plant------------" << std::endl;
+		break;
+	case ItemType::Fish:
+		std::cout << "------------Fish------------" << std::endl;
+		break;
+	case ItemType::Bird:
+		std::cout << "------------Bird------------" << std::endl;
+		break;
+	case ItemType::Animal:
+		std::cout << "------------Animal------------" << std::endl;
+		break;
+	}
+	std::cout << "\tName: " << name << std::endl << "\tArea: " << area << std::endl;
+	std::cout << "\tTemperature: " << temperature << std::endl << "\tWetness: " << wetness << std::endl;
+	std::cout << "\tMaximal age: " << max_age << std::endl << "\tReproductive age: " << repr_age << std::endl;
+}
 
 void Plant::Print(void) {
+	Base::Print();
 	std::cout << "\tType plant: ";
 	switch (type_plant) {
 	case TypePlant::Herbage:
@@ -256,12 +277,14 @@ void Plant::Print(void) {
 }
 
 void Fish::Print(void) {
+	Base::Print();
 	std::cout << "\tType water: ";
 	if (type_water) std::cout << "fresh" << std::endl;
 	else std::cout << "marine" << std::endl;
 }
 
 void Bird::Print(void) {
+	Base::Print();
 	std::cout << "\tQuantity of eggs in laying: ";
 	std::cout << quan_eggs << std::endl;
 	std::cout << "\tAbility fly: ";
@@ -276,6 +299,7 @@ void Bird::Print(void) {
 }
 
 void Animal::Print(void) {
+	Base::Print();
 	std::cout << "\tType food: ";
 	switch (type_food) {
 	case TypeFood::Herbivore:
@@ -290,57 +314,6 @@ void Animal::Print(void) {
 	}
 }
 
-void SubjList::Print(void) {
-	for (Base* p = (Base*)GetHead(); p; p = (Base*)p->GetNext()) {
-		p->Print();
-		std::cout << std::endl;
-	}
-}
-
-void Base::Print(void) {
-	if (type != ItemType::None) {
-		switch (type) {
-		case ItemType::Plant:
-			std::cout << "------------Plant------------" << std::endl;
-			break;
-		case ItemType::Fish:
-			std::cout << "------------Fish------------" << std::endl;
-			break;
-		case ItemType::Bird:
-			std::cout << "------------Bird------------" << std::endl;
-			break;
-		case ItemType::Animal:
-			std::cout << "------------Animal------------" << std::endl;
-			break;
-		}
-		std::cout << "\tName: " << name << std::endl << "\tArea: " << area << std::endl;
-		std::cout << "\tTemperature: " << temperature << std::endl << "\tWetness: " << wetness << std::endl;
-		std::cout << "\tMaximal age: " << max_age << std::endl << "\tReproductive age: " << repr_age << std::endl;
-		switch (type) {
-		case ItemType::Plant:
-			((Plant*)this)->Print();
-			break;
-		case ItemType::Fish:
-			((Fish*)this)->Print();
-			break;
-		case ItemType::Bird:
-			((Bird*)this)->Print();
-			break;
-		case ItemType::Animal:
-			((Animal*)this)->Print();
-			break;
-		}
-	}
-}
-
-int Base::GetMax_age(void) {
-	return this->max_age;
-}
-
-std::string Base::GetName(void) {
-	return this->name;
-}
-
 void SubjList::Switch(int j) {
 	Item* a = this->Remove(j);
 	this->Insert(a, j + 1);
@@ -353,7 +326,7 @@ void SubjList::SortName() {
 		for (j = 0; j < len - 1; j++) {
 			p1 = (Base*)this->GetItem(j);
 			p2 = (Base*)this->GetItem(j + 1);
-			if ((p1->GetName().compare(p2->GetName()) > 0)) {
+			if ((p1->name.compare(p2->name) > 0)) {
 				this->Switch(j);
 			};
 		}
@@ -365,7 +338,7 @@ void SubjList::SearchYears(int lborder, int rborder) {
 	Base* tmp = NULL;
 	for (curr = this->GetHead(); curr; curr = curr->GetNext()) {
 		tmp = (Base*)curr;
-		if (tmp->GetMax_age() >= lborder && tmp->GetMax_age() <= rborder) {
+		if (tmp->max_age >= lborder && tmp->max_age <= rborder) {
 			tmp->Print();
 		}
 	}

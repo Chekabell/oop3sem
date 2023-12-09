@@ -7,8 +7,8 @@ enum class TypeFood { None, Herbivore, Aft, Meat };
 
 
 class Base : public Item {
+    friend class SubjList;
 private:
-    ItemType type;
     std::string name;
     std::string area;
     int temperature;
@@ -17,13 +17,11 @@ private:
     int repr_age;
 public:
     Base();
-    ~Base();
-    void SetType(ItemType);
+    virtual ~Base();
+    virtual ItemType GetType() = 0;
     static Base* Create(int);
-    void Input();
-    void Print(void);
-    std::string GetName(void);
-    int GetMax_age(void);
+    virtual void Input(void);
+    virtual void Print(void);
 };
 
 class Plant : public Base {
@@ -34,8 +32,9 @@ private:
 public:
     Plant();
     ~Plant() { Base::~Base(); };
-    void Input(void);
-    void Print(void);
+    void Input(void) override;
+    void Print(void) override;
+    ItemType GetType() override;
 };
 
 class Fish : public Base {
@@ -44,8 +43,9 @@ private:
 public:
     Fish();
     ~Fish() { Base::~Base(); };
-    void Input(void);
-    void Print(void);
+    void Input(void) override;
+    void Print(void) override;
+    ItemType GetType() override;
 };
 
 class Bird : public Base {
@@ -57,8 +57,9 @@ private:
 public:
     Bird();
     ~Bird() { Base::~Base(); };
-    void Input(void);
-    void Print(void);
+    void Input(void) override;
+    void Print(void) override;
+    ItemType GetType() override;
 };
 
 class Animal : public Base {
@@ -67,12 +68,12 @@ private:
 public:
     Animal();
     ~Animal() { Base::~Base(); };
-    void Input(void);
-    void Print(void);
+    void Input(void) override;
+    void Print(void) override;
+    ItemType GetType() override;
 };
 
 class SubjList : public List {
-    friend class Base;
 public:
     SubjList() : List() {};
     ~SubjList();
