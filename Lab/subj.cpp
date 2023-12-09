@@ -1,67 +1,76 @@
 #include "subj.h"
 
-Base::Base() {
-	type = ItemType::None;
-	name = "unknown";
-	area = "unknown";
-	temperature = 0;
-	wetness = 0;
-	max_age = 0;
-	repr_age = 0;
+
+void Base::SetType(ItemType t) {
+	type = t;
 }
 
-Base::~Base(){
-	((Item*)this)->~Item();
-	delete this;
+Base::Base()
+	: Item()
+	, name("unknown")
+	, area("unknown")
+	, temperature(0)
+	, wetness(0)
+	, max_age(0)
+	, repr_age(0)
+{
+	SetType(ItemType::None);
+}
+
+Base::~Base() { ((Item*)this)->~Item(); };
+
+
+Plant::Plant()
+	: Base()
+	, type_plant(TypePlant::None)
+	, metod_repr(TypeReprod::None)
+	, fruits(false)
+{
+	SetType(ItemType::Plant);
+}
+
+Fish::Fish()
+	: Base()
+	, type_water(false)
+{
+	SetType(ItemType::Fish);
+}
+
+Bird::Bird() 
+	: Base()
+	, quan_eggs(0)
+	, can_fly(false)
+	, can_swim_on(false)
+	, can_swim_under(false)
+{
+	SetType(ItemType::Bird);
+}
+
+Animal::Animal() 
+	: Base()
+	, type_food(TypeFood::None)
+{
+	SetType(ItemType::Animal);
 }
 
 SubjList::~SubjList() {
-	((List*)this)->~List();
-	delete this;
-}
-
-SubjList::SubjList() :List(){}
-
-Plant::Plant() {
-	type_plant = TypePlant::None;
-	metod_repr = TypeReprod::None;
-	fruits = false;
-}
-
-Fish::Fish() {
-	type_water = false;
-}
-
-
-Bird::Bird() {
-	quan_eggs = 0;
-	can_fly = false;
-	can_swim_on = false;
-	can_swim_under = false;
-}
-
-Animal::Animal() {
-	type_food = TypeFood::None;
-}
+	((List*)this)->~List(); 
+};
 
 Base* Base::Create(int t) {
 	Base* p = NULL;
 	switch (t) {
 	case 1:
-			p = (Base*)new Plant;
-			p->type = ItemType::Plant;
+			p = new Plant();
 			break;
 	case 2:
-			p = (Base*)new Fish;
-			p->type = ItemType::Fish;
+			p = new Fish();
 			break;
 	case 3:
-			p = (Base*)new Bird;
-			p->type = ItemType::Bird;
+			p = new Bird();
 			break;
 	case 4:
-			p = (Base*)new Animal;
-			p->type = ItemType::Animal;
+			p = new Animal();
 			break;
 	}
 	return p;

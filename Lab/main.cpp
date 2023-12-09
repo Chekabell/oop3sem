@@ -29,7 +29,7 @@ int main(void) {
             case 1:
                 typ = DoMenu(TypeObject, 4);
                     if (typ) {
-                        item = item->Create(typ);
+                        item = Base::Create(typ);
                         item->Input();
                         list.Add((Item*)item);
                     }

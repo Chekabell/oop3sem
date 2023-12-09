@@ -18,7 +18,8 @@ private:
 public:
     Base();
     ~Base();
-    Base* Create(int);
+    void SetType(ItemType);
+    static Base* Create(int);
     void Input();
     void Print(void);
     std::string GetName(void);
@@ -32,6 +33,7 @@ private:
     bool fruits;
 public:
     Plant();
+    ~Plant() { Base::~Base(); };
     void Input(void);
     void Print(void);
 };
@@ -41,6 +43,7 @@ private:
     bool type_water;
 public:
     Fish();
+    ~Fish() { Base::~Base(); };
     void Input(void);
     void Print(void);
 };
@@ -53,6 +56,7 @@ private:
     bool can_swim_under;
 public:
     Bird();
+    ~Bird() { Base::~Base(); };
     void Input(void);
     void Print(void);
 };
@@ -62,6 +66,7 @@ private:
     TypeFood type_food;
 public:
     Animal();
+    ~Animal() { Base::~Base(); };
     void Input(void);
     void Print(void);
 };
@@ -69,7 +74,7 @@ public:
 class SubjList: public List {
     friend class Base;
 public:
-    SubjList();
+    SubjList() : List() {};
     ~SubjList();
     void Print(void);
     void SortName();
